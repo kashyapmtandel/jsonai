@@ -6,7 +6,18 @@ const updateMetaTag = (selector, content) => {
   const element = document.querySelector(selector);
   if (element) {
     element.setAttribute('content', content);
+    return element;
   }
+  return null;
+};
+
+const updateLinkHref = (selector, href) => {
+  const element = document.querySelector(selector);
+  if (element) {
+    element.setAttribute('href', href);
+    return element;
+  }
+  return null;
 };
 
 export default function SeoContent({ title, description, features, faq }) {
@@ -19,9 +30,12 @@ export default function SeoContent({ title, description, features, faq }) {
     const originalOgDesc = document.querySelector('meta[property="og:description"]')?.getAttribute('content') || '';
     const originalTwitterTitle = document.querySelector('meta[name="twitter:title"]')?.getAttribute('content') || '';
     const originalTwitterDesc = document.querySelector('meta[name="twitter:description"]')?.getAttribute('content') || '';
+    const originalOgUrl = document.querySelector('meta[property="og:url"]')?.getAttribute('content') || '';
+    const originalCanonical = document.querySelector('link[rel="canonical"]')?.getAttribute('href') || '';
 
     const pageTitle = title ? `${title} | JSON AI` : originalTitle;
     const pageDescription = description && description.length > 0 ? description[0] : originalDescription;
+    const pageUrl = `${window.location.origin}${window.location.pathname}`;
 
     document.title = pageTitle;
     updateMetaTag('meta[name="description"]', pageDescription);
@@ -29,6 +43,8 @@ export default function SeoContent({ title, description, features, faq }) {
     updateMetaTag('meta[property="og:description"]', pageDescription);
     updateMetaTag('meta[name="twitter:title"]', pageTitle);
     updateMetaTag('meta[name="twitter:description"]', pageDescription);
+    updateMetaTag('meta[property="og:url"]', pageUrl);
+    updateLinkHref('link[rel="canonical"]', pageUrl);
 
     return () => {
       document.title = originalTitle;
@@ -37,10 +53,11 @@ export default function SeoContent({ title, description, features, faq }) {
       updateMetaTag('meta[property="og:description"]', originalOgDesc);
       updateMetaTag('meta[name="twitter:title"]', originalTwitterTitle);
       updateMetaTag('meta[name="twitter:description"]', originalTwitterDesc);
+      updateMetaTag('meta[property="og:url"]', originalOgUrl);
+      updateLinkHref('link[rel="canonical"]', originalCanonical);
     };
   }, [title, description]);
 
-  // Generate Google Rich Snippets FAQ Schema
   const faqSchema = faq && faq.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
