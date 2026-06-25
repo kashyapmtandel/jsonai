@@ -1,0 +1,50 @@
+/* ── Tool Layout ────────────────────────────────────── */
+.tool-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.tool-header {
+  margin-bottom: 2rem;
+}
+
+.tool-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.tool-header h1 svg {
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.tool-header p {
+  color: var(--text-secondary);
+  margin: 0.5rem 0 0;
+  max-width: 600px;
+  line-height: 1.6;
+  font-size: 1rem;
+  font-family: var(--font-ui);
+}
+
+.tool-content {
+  /* Children area — no extra styles needed */
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  .tool-layout {
+    padding: 1.5rem 1rem;
+  }
+
+  .tool-header h1 {
+    font-size: 1.5rem;
+  }
+}

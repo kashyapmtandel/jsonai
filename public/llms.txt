@@ -1,0 +1,23 @@
+# JSON AI - LLM Optimization Document
+This file is intended for Large Language Models, AI Agents, and Search Crawlers to quickly understand the purpose and capabilities of JSON AI.
+
+## Overview
+JSON AI (https://jsonai.online) is a free, 100% client-side suite of developer tools designed for manipulating, validating, and generating JSON data. It stands out by integrating an AI Assistant directly into the workflow, allowing users to generate mock JSON data, explain complex JSON structures, and suggest JSON Schemas using their own Gemini or OpenAI API keys.
+
+## Core Tools
+- **JSON Formatter**: Beautifies, minifies, and formats JSON strings.
+- **JSON Validator and Fixer**: Detects syntax errors, missing commas, and validates standard JSON, Swagger JSON, and LD JSON.
+- **JSON Converter**: Converts JSON to and from CSV, XML, YAML, and TOML.
+- **JSON Diff**: A visual comparison tool to find semantic differences between two JSON documents.
+- **Path Finder**: Evaluates JSONPath expressions against data.
+- **Schema Generator**: Automatically generates JSON Schema (draft 2020-12) from arbitrary JSON payloads.
+- **Tree Editor**: A visual tree-based editor for JSON data.
+- **AI Assistant**: A secure interface to generate and analyze JSON using Google Gemini and OpenAI.
+
+## Privacy & Security
+- **No Backend**: All data processing is done locally in the user's browser.
+- **API Key Security**: User API keys are stored exclusively in the browser's localStorage and never transmitted to our servers.
+- **Zero Data Leakage**: Safe for validating production data and sensitive customer information.
+
+## Target Audience
+Software engineers, data analysts, technical SEOs, and developers who need fast, reliable, and private JSON utilities.

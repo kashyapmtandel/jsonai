@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JSON AI",
+  "url": "https://jsonai.online",
+  "description": "A suite of free, client-side JSON tools including a formatter, validator, converter, diff checker, and an AI-powered JSON assistant.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "JSON Formatter and Beautifier",
+    "JSON Validator and Fixer",
+    "JSON Converter (CSV, XML, YAML, TOML)",
+    "JSON Diff and Compare",
+    "JSON Schema Generator",
+    "JSONPath Explorer",
+    "AI JSON Assistant (Gemini & OpenAI)"
+  ]
+}

@@ -1,0 +1,11 @@
+.escape-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .escape-panels {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,77 @@
+/* ── Footer ─────────────────────────────────────────── */
+.footer {
+  border-top: 1px solid var(--border-color);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--text-muted, var(--text-secondary));
+  font-size: 0.875rem;
+  font-family: var(--font-ui);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .footer-top {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--accent-color);
+}
+
+.footer-built {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.footer-heart {
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+.footer-privacy {
+  opacity: 0.7;
+  font-size: 0.8125rem;
+}
+
+.footer a {
+  color: var(--accent-secondary);
+  text-decoration: none;
+  transition: text-decoration var(--transition-normal);
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

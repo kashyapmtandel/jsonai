@@ -1,0 +1,64 @@
+/* ── CodeEditor Wrapper ─────────────────────────────── */
+.code-editor-wrapper {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  transition: border-color var(--transition-normal);
+}
+
+.code-editor-wrapper:focus-within {
+  border-color: var(--accent-primary);
+}
+
+.code-editor {
+  height: 100%;
+}
+
+/* ── CodeMirror Overrides ──────────────────────────── */
+.cm-editor {
+  height: 100% !important;
+}
+
+.cm-editor.cm-focused {
+  outline: none !important;
+}
+
+.cm-editor .cm-scroller {
+  font-family: var(--font-mono) !important;
+}
+
+.cm-editor .cm-gutters {
+  background-color: var(--bg-secondary) !important;
+  border-right: 1px solid var(--border-color) !important;
+  color: var(--text-muted, var(--text-secondary)) !important;
+}
+
+.cm-editor .cm-activeLineGutter {
+  background-color: rgba(99, 102, 241, 0.08) !important;
+}
+
+.cm-editor .cm-activeLine {
+  background-color: rgba(99, 102, 241, 0.04) !important;
+}
+
+.cm-editor .cm-selectionBackground {
+  background-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+.cm-editor .cm-cursor {
+  border-left-color: var(--accent-primary) !important;
+}
+
+/* ── Light theme adjustments ────────────────────────── */
+[data-theme='light'] .cm-editor .cm-gutters {
+  background-color: var(--bg-secondary) !important;
+}
+
+[data-theme='light'] .cm-editor .cm-activeLine {
+  background-color: rgba(99, 102, 241, 0.06) !important;
+}
+
+[data-theme='light'] .cm-editor .cm-activeLineGutter {
+  background-color: rgba(99, 102, 241, 0.1) !important;
+}

@@ -1,0 +1,65 @@
+/* ── Tool Card ──────────────────────────────────────── */
+.tool-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg, 16px);
+  background: var(--bg-card, var(--bg-secondary));
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow, 0 8px 32px rgba(99, 102, 241, 0.15));
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+/* ── Icon ───────────────────────────────────────────── */
+.tool-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+/* ── Typography ─────────────────────────────────────── */
+.tool-card h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.tool-card p {
+  font-size: 0.875rem;
+  font-family: var(--font-ui);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Arrow Affordance ───────────────────────────────── */
+.tool-card-arrow {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  color: var(--accent-primary);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.tool-card:hover .tool-card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}

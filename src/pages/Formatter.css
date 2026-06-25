@@ -1,0 +1,37 @@
+.formatter-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.error-banner {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: var(--error);
+  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  margin-bottom: 1rem;
+  animation: slideUp 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .formatter-panels {
+    grid-template-columns: 1fr;
+  }
+}
