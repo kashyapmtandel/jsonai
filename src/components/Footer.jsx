@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import RouteLink from './RouteLink';
 import { Heart } from 'lucide-react';
 import './Footer.css';
 
@@ -15,10 +15,10 @@ const Footer = () => {
             by the JSON AI Team &copy; {year}
           </p>
           <div className="footer-links">
-            <Link to="/about">About Us</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/privacy">Privacy Policy</Link>
-            <Link to="/terms">Terms of Service</Link>
+            <RouteLink to="/about">About Us</RouteLink>
+            <RouteLink to="/contact">Contact</RouteLink>
+            <RouteLink to="/privacy">Privacy Policy</RouteLink>
+            <RouteLink to="/terms">Terms of Service</RouteLink>
           </div>
         </div>
         <p className="footer-privacy">

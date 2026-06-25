@@ -4,6 +4,7 @@ import CopyButton from '../components/CopyButton';
 import SeoContent from '../components/SeoContent';
 import ActionBar from '../components/ActionBar';
 import CodeEditor from '../components/CodeEditor';
+import TabGroup from '../components/TabGroup';
 import { BotMessageSquare, Trash2, Send, Key, ChevronDown, ChevronUp, Eye, EyeOff, Zap, Hash, Sparkles } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { callGemini, callOpenAI } from '../utils/ai';
@@ -125,13 +126,13 @@ export default function PromptBuilder() {
           <div className="ai-config-panel">
             <div className="ai-config-row">
               <label>Provider</label>
-              <div className="ai-provider-tabs">
-                {PROVIDERS.map((p) => (
-                  <button key={p.id} className={`ai-provider-tab ${provider === p.id ? 'active' : ''}`} onClick={() => setProvider(p.id)}>
-                    {p.label}
-                  </button>
-                ))}
-              </div>
+              <TabGroup
+                items={PROVIDERS.map((p) => ({ id: p.id, label: p.label }))}
+                activeId={provider}
+                onChange={setProvider}
+                variant="pill"
+                className="ai-provider-tabs"
+              />
             </div>
             <div className="ai-config-row">
               <label>API Key</label>

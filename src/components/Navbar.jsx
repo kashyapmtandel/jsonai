@@ -1,14 +1,14 @@
-import { useState, useEffect, useCallback } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Braces, Sun, Moon, Menu, X, Minimize2 } from 'lucide-react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import RouteLink from './RouteLink';
+import { Braces, Sun, Moon, Menu, X, ChevronDown } from 'lucide-react';
 import tools from '../data/tools';
 import './Navbar.css';
 
-const navItems = tools.map((t) => ({
-  to: t.to,
-  label: t.title.replace(/^JSON\s+/, ''),
-  icon: t.icon,
-}));
+const primaryRoutes = ['/ai-assistant', '/prompt-builder', '/type-generator', '/schema'];
+const primaryNavItems = tools.filter((t) => primaryRoutes.includes(t.to));
+const moreNavItems = tools.filter((t) => !primaryRoutes.includes(t.to));
+
+const formatLabel = (title) => title.replace(/^JSON\s+/, '');
 
 const useTheme = () => {
   const [theme, setTheme] = useState(() => {
@@ -30,16 +30,73 @@ const useTheme = () => {
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownToggleRef = useRef(null);
+  const dropdownMenuRef = useRef(null);
   const { theme, toggleTheme } = useTheme();
 
   // Close mobile menu on route change or resize
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 1024) setMobileOpen(false);
+      if (window.innerWidth > 1024) {
+        setMobileOpen(false);
+        setDropdownOpen(false);
+      }
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Close dropdown when clicking outside or when using keyboard navigation
+  useEffect(() => {
+    if (!dropdownOpen) return undefined;
+
+    const dropdown = dropdownMenuRef.current;
+    const toggle = dropdownToggleRef.current;
+    const focusableItems = dropdown?.querySelectorAll('a');
+    const firstItem = focusableItems?.[0] ?? null;
+    const lastItem = focusableItems?.[focusableItems.length - 1] ?? null;
+
+    if (firstItem) {
+      firstItem.focus();
+    }
+
+    const handleClickOutside = (event) => {
+      const dropdownWrapper = document.querySelector('.navbar-dropdown');
+      if (dropdownWrapper && !dropdownWrapper.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    const handleKeydown = (event) => {
+      if (event.key === 'Escape') {
+        setDropdownOpen(false);
+        toggle?.focus();
+        return;
+      }
+
+      if (event.key === 'Tab' && dropdown) {
+        if (event.shiftKey) {
+          if (document.activeElement === firstItem) {
+            event.preventDefault();
+            toggle?.focus();
+          }
+        } else {
+          if (document.activeElement === lastItem) {
+            event.preventDefault();
+            firstItem?.focus();
+          }
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeydown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeydown);
+    };
+  }, [dropdownOpen]);
 
   // Prevent body scroll when mobile menu open
   useEffect(() => {
@@ -47,27 +104,69 @@ const Navbar = () => {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  const closeMobile = () => setMobileOpen(false);
+  const closeNav = () => {
+    setMobileOpen(false);
+    setDropdownOpen(false);
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <NavLink to="/" className="navbar-logo" onClick={closeMobile}>
+        <RouteLink to="/" className="navbar-logo" onClick={closeNav}>
           <Braces size={24} strokeWidth={2.5} />
           <span>JSON AI</span>
-        </NavLink>
+        </RouteLink>
 
         <ul className="navbar-links">
-          {navItems.map(({ to, label }) => (
+          {primaryNavItems.map(({ to, title }) => (
             <li key={to}>
-              <NavLink
+              <RouteLink
                 to={to}
-                className={({ isActive }) => (isActive ? 'active' : '')}
+                activeClassName="active"
+                onClick={closeNav}
               >
-                {label}
-              </NavLink>
+                {formatLabel(title)}
+              </RouteLink>
             </li>
           ))}
+
+          <li className={`navbar-dropdown ${dropdownOpen ? 'open' : ''}`}>
+            <button
+              type="button"
+              id="navbar-tools-button"
+              ref={dropdownToggleRef}
+              className="dropdown-toggle"
+              onClick={() => setDropdownOpen((prev) => !prev)}
+              aria-expanded={dropdownOpen}
+              aria-haspopup="menu"
+              aria-controls="navbar-tools-menu"
+              aria-label="Open tools menu"
+            >
+              Tools
+              <ChevronDown size={16} />
+            </button>
+            <ul
+              id="navbar-tools-menu"
+              ref={dropdownMenuRef}
+              className="dropdown-menu"
+              role="menu"
+              aria-labelledby="navbar-tools-button"
+            >
+              {moreNavItems.map(({ to, title, icon: Icon }) => (
+                <li key={to}>
+                  <RouteLink
+                    to={to}
+                    activeClassName="active"
+                    onClick={closeNav}
+                    role="menuitem"
+                  >
+                    <Icon size={16} />
+                    {formatLabel(title)}
+                  </RouteLink>
+                </li>
+              ))}
+            </ul>
+          </li>
         </ul>
 
         <div className="navbar-actions">
@@ -93,16 +192,16 @@ const Navbar = () => {
       {/* Mobile menu overlay */}
       <div className={`mobile-menu ${mobileOpen ? 'mobile-menu--open' : ''}`}>
         <ul className="mobile-menu-links">
-          {navItems.map(({ to, label, icon: Icon }) => (
+          {tools.map(({ to, title, icon: Icon }) => (
             <li key={to}>
-              <NavLink
+              <RouteLink
                 to={to}
-                className={({ isActive }) => (isActive ? 'active' : '')}
-                onClick={closeMobile}
+                activeClassName="active"
+                onClick={closeNav}
               >
                 <Icon size={18} />
-                {label}
-              </NavLink>
+                {formatLabel(title)}
+              </RouteLink>
             </li>
           ))}
         </ul>

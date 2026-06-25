@@ -4,6 +4,7 @@ import CodeEditor from '../components/CodeEditor';
 import CopyButton from '../components/CopyButton';
 import SeoContent from '../components/SeoContent';
 import ActionBar from '../components/ActionBar';
+import TabGroup from '../components/TabGroup';
 import { Sparkles, Trash2, Send, Key, ChevronDown, ChevronUp, Eye, EyeOff, Code2 } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { callGemini, callOpenAI } from '../utils/ai';
@@ -123,17 +124,13 @@ export default function TypeGenerator() {
           <div className="ai-config-panel">
             <div className="ai-config-row">
               <label>Provider</label>
-              <div className="ai-provider-tabs">
-                {PROVIDERS.map((p) => (
-                  <button
-                    key={p.id}
-                    className={`ai-provider-tab ${provider === p.id ? 'active' : ''}`}
-                    onClick={() => setProvider(p.id)}
-                  >
-                    {p.label}
-                  </button>
-                ))}
-              </div>
+              <TabGroup
+                items={PROVIDERS.map((p) => ({ id: p.id, label: p.label }))}
+                activeId={provider}
+                onChange={setProvider}
+                variant="pill"
+                className="ai-provider-tabs"
+              />
             </div>
             <div className="ai-config-row">
               <label>API Key</label>
@@ -157,17 +154,13 @@ export default function TypeGenerator() {
         )}
       </div>
 
-      <div className="typegen-lang-tabs">
-        {LANGUAGES.map(l => (
-          <button 
-            key={l.id} 
-            className={`typegen-lang-tab ${lang === l.id ? 'active' : ''}`}
-            onClick={() => setLang(l.id)}
-          >
-            {l.label}
-          </button>
-        ))}
-      </div>
+      <TabGroup
+        items={LANGUAGES.map((l) => ({ id: l.id, label: l.label }))}
+        activeId={lang}
+        onChange={setLang}
+        variant="pill"
+        className="typegen-lang-tabs"
+      />
 
       {!isConfigured && (
         <div className="ai-setup-card">

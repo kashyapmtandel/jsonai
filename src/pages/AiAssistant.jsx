@@ -4,6 +4,7 @@ import CodeEditor from '../components/CodeEditor';
 import CopyButton from '../components/CopyButton';
 import SeoContent from '../components/SeoContent';
 import ActionBar from '../components/ActionBar';
+import TabGroup from '../components/TabGroup';
 import { Sparkles, Trash2, Send, Key, ChevronDown, ChevronUp, Eye, EyeOff } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { callGemini, callOpenAI } from '../utils/ai';
@@ -109,17 +110,13 @@ const AiAssistant = () => {
           <div className="ai-config-panel">
             <div className="ai-config-row">
               <label>Provider</label>
-              <div className="ai-provider-tabs">
-                {PROVIDERS.map((p) => (
-                  <button
-                    key={p.id}
-                    className={`ai-provider-tab ${provider === p.id ? 'active' : ''}`}
-                    onClick={() => setProvider(p.id)}
-                  >
-                    {p.label}
-                  </button>
-                ))}
-              </div>
+              <TabGroup
+                items={PROVIDERS.map((p) => ({ id: p.id, label: p.label }))}
+                activeId={provider}
+                onChange={setProvider}
+                variant="pill"
+                className="ai-provider-tabs"
+              />
             </div>
             <div className="ai-config-row">
               <label>API Key</label>
@@ -144,17 +141,13 @@ const AiAssistant = () => {
       </div>
 
       {/* Mode tabs */}
-      <div className="ai-mode-tabs">
-        {MODES.map((m) => (
-          <button
-            key={m.id}
-            className={`ai-mode-tab ${mode === m.id ? 'active' : ''}`}
-            onClick={() => { setMode(m.id); setOutput(''); setError(''); }}
-          >
-            {m.label}
-          </button>
-        ))}
-      </div>
+      <TabGroup
+        items={MODES}
+        activeId={mode}
+        onChange={(id) => { setMode(id); setOutput(''); setError(''); }}
+        variant="underline"
+        className="ai-mode-tabs"
+      />
 
       <p className="ai-mode-desc">{MODES.find((m) => m.id === mode)?.desc}</p>
 

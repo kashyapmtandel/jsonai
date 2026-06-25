@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+import RouteLink from './RouteLink';
 import { ArrowRight } from 'lucide-react';
 import './ToolCard.css';
 
 const ToolCard = ({ title, description, icon: Icon, to, color = 'var(--accent-primary)' }) => {
   return (
-    <Link to={to} className="tool-card">
+    <RouteLink to={to} className="tool-card">
       <div
         className="tool-card-icon"
         style={{ backgroundColor: `${color}18`, color }}
@@ -16,7 +16,7 @@ const ToolCard = ({ title, description, icon: Icon, to, color = 'var(--accent-pr
       <span className="tool-card-arrow">
         <ArrowRight size={18} />
       </span>
-    </Link>
+    </RouteLink>
   );
 };
 

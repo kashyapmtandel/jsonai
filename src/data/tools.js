@@ -12,6 +12,13 @@ const tools = [
     color: '#8b5cf6',
   },
   {
+    title: 'JSON Prompt Builder',
+    description: 'Convert verbose AI prompts into compact JSON format to save 50–75% tokens on every API call.',
+    icon: BotMessageSquare,
+    to: '/prompt-builder',
+    color: '#a855f7',
+  },
+  {
     title: 'Type Generator',
     description: 'Instantly convert JSON into production-ready TypeScript, Zod, Python, Go, Rust, and PHP.',
     icon: Code2,
@@ -19,18 +26,18 @@ const tools = [
     color: '#3b82f6',
   },
   {
+    title: 'Schema Generator',
+    description: 'Auto-generate JSON Schema and validate data against schemas.',
+    icon: FileJson,
+    to: '/schema',
+    color: '#ec4899',
+  },
+  {
     title: 'JSON Minifier',
     description: 'Strip whitespace from JSON to save LLM tokens and reduce GPT-4, Claude, and Gemini API costs.',
     icon: Minimize2,
     to: '/minifier',
     color: '#f97316',
-  },
-  {
-    title: 'JSON Prompt Builder',
-    description: 'Convert verbose AI prompts into compact JSON format to save 50–75% tokens on every API call.',
-    icon: BotMessageSquare,
-    to: '/prompt-builder',
-    color: '#a855f7',
   },
   {
     title: 'JSON Formatter',
@@ -66,13 +73,6 @@ const tools = [
     icon: Search,
     to: '/path-finder',
     color: '#a855f7',
-  },
-  {
-    title: 'Schema Generator',
-    description: 'Auto-generate JSON Schema and validate data against schemas.',
-    icon: FileJson,
-    to: '/schema',
-    color: '#ec4899',
   },
   {
     title: 'Tree Editor',

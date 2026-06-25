@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 
 // Layout components
@@ -40,6 +40,7 @@ function App() {
             <Route path="/diff" element={<DiffTool />} />
             <Route path="/path-finder" element={<PathFinder />} />
             <Route path="/schema" element={<SchemaGenerator />} />
+            <Route path="/schema-generator" element={<Navigate to="/schema" replace />} />
             <Route path="/editor" element={<TreeEditor />} />
             <Route path="/ai-assistant" element={<AiAssistant />} />
             <Route path="/type-generator" element={<TypeGenerator />} />

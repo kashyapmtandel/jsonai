@@ -4,6 +4,7 @@ import CodeEditor from '../components/CodeEditor';
 import CopyButton from '../components/CopyButton';
 import ActionBar from '../components/ActionBar';
 import SeoContent from '../components/SeoContent';
+import TabGroup from '../components/TabGroup';
 import { FileJson, Download, Trash2, FileText, ShieldCheck } from 'lucide-react';
 import { generateSchema, validateSchema } from '../utils/jsonSchema';
 import { sampleJson } from '../utils/sampleData';
@@ -77,20 +78,16 @@ const SchemaGenerator = () => {
       description="Auto-generate JSON Schema from data or validate JSON against a schema."
       icon={FileJson}
     >
-      <div className="schema-tabs">
-        <button
-          className={`schema-tab ${activeTab === 'generate' ? 'active' : ''}`}
-          onClick={() => setActiveTab('generate')}
-        >
-          <FileJson size={16} /> Generate Schema
-        </button>
-        <button
-          className={`schema-tab ${activeTab === 'validate' ? 'active' : ''}`}
-          onClick={() => setActiveTab('validate')}
-        >
-          <ShieldCheck size={16} /> Validate Against Schema
-        </button>
-      </div>
+      <TabGroup
+        items={[
+          { id: 'generate', label: 'Generate Schema', icon: FileJson },
+          { id: 'validate', label: 'Validate Against Schema', icon: ShieldCheck },
+        ]}
+        activeId={activeTab}
+        onChange={setActiveTab}
+        variant="underline"
+        className="schema-tabs"
+      />
 
       {activeTab === 'generate' && (
         <>

@@ -75,6 +75,93 @@
   background: rgba(99, 102, 241, 0.12);
 }
 
+.navbar-dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: color var(--transition-normal), background var(--transition-normal);
+}
+
+.dropdown-toggle:hover,
+.navbar-dropdown.open > .dropdown-toggle {
+  color: var(--text-primary);
+  background: var(--bg-elevated, rgba(255, 255, 255, 0.06));
+}
+
+.dropdown-toggle {
+  transition: color var(--transition-normal), background var(--transition-normal), transform var(--transition-normal);
+}
+
+.navbar-dropdown.open .dropdown-toggle svg {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.3rem);
+  right: 0;
+  min-width: 220px;
+  padding: 0.5rem 0;
+  margin: 0;
+  list-style: none;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  z-index: 1001;
+}
+
+.navbar-dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu li {
+  padding: 0;
+}
+
+.dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  transition: color var(--transition-normal), background var(--transition-normal);
+}
+
+.dropdown-menu a:hover {
+  color: var(--text-primary);
+  background: var(--bg-elevated, rgba(255, 255, 255, 0.06));
+}
+
+.dropdown-menu a.active {
+  color: var(--accent-primary);
+  background: rgba(99, 102, 241, 0.12);
+}
+
 /* ── Actions (theme toggle + mobile toggle) ─────────── */
 .navbar-actions {
   display: flex;
