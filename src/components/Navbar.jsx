@@ -1,36 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
-import {
-  Braces,
-  Sun,
-  Moon,
-  Menu,
-  X,
-  Wand2,
-  ShieldCheck,
-  ArrowLeftRight,
-  GitCompare,
-  Search,
-  FileJson,
-  TreePine,
-  Sparkles,
-  Lock,
-  Code2
-} from 'lucide-react';
+import { Braces, Sun, Moon, Menu, X } from 'lucide-react';
+import tools from '../data/tools';
 import './Navbar.css';
 
-const navItems = [
-  { to: '/ai-assistant', label: 'AI Assistant', icon: Sparkles },
-  { to: '/formatter', label: 'Formatter', icon: Wand2 },
-  { to: '/validator', label: 'Validator', icon: ShieldCheck },
-  { to: '/converter', label: 'Converter', icon: ArrowLeftRight },
-  { to: '/diff', label: 'Diff', icon: GitCompare },
-  { to: '/path-finder', label: 'Path Finder', icon: Search },
-  { to: '/schema', label: 'Schema', icon: FileJson },
-  { to: '/type-generator', label: 'Type Gen', icon: Code2 },
-  { to: '/editor', label: 'Tree Editor', icon: TreePine },
-  { to: '/escape', label: 'Escape', icon: Lock },
-];
+const navItems = tools.map((t) => ({
+  to: t.to,
+  label: t.title.replace(/^JSON\s+/, ''),
+  icon: t.icon,
+}));
 
 const useTheme = () => {
   const [theme, setTheme] = useState(() => {
