@@ -1,6 +1,6 @@
 import {
   Wand2, ShieldCheck, ArrowLeftRight, GitCompare,
-  Search, FileJson, TreePine, Sparkles, Lock, Code2, Minimize2
+  Search, FileJson, TreePine, Sparkles, Lock, Code2, Minimize2, BotMessageSquare
 } from 'lucide-react';
 
 const tools = [
@@ -24,6 +24,13 @@ const tools = [
     icon: Minimize2,
     to: '/minifier',
     color: '#f97316',
+  },
+  {
+    title: 'JSON Prompt Builder',
+    description: 'Convert verbose AI prompts into compact JSON format to save 50–75% tokens on every API call.',
+    icon: BotMessageSquare,
+    to: '/prompt-builder',
+    color: '#a855f7',
   },
   {
     title: 'JSON Formatter',

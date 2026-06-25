@@ -20,6 +20,7 @@
     "JSONPath Explorer",
     "AI JSON Assistant (Gemini & OpenAI)",
     "AI Type and Validation Generator (TypeScript, Zod, Python, PHP, Go, Rust)",
-    "JSON Minifier for LLM Token Savings (GPT-4, Claude, Gemini)"
+    "JSON Minifier for LLM Token Savings (GPT-4, Claude, Gemini)",
+    "JSON Prompt Builder — Convert verbose prompts to compact JSON"
   ]
 }

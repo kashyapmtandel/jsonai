@@ -17,6 +17,7 @@ import TreeEditor from './pages/TreeEditor'
 import AiAssistant from './pages/AiAssistant'
 import TypeGenerator from './pages/TypeGenerator'
 import JsonMinifier from './pages/JsonMinifier'
+import PromptBuilder from './pages/PromptBuilder'
 import EscapeTool from './pages/EscapeTool'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
@@ -43,6 +44,7 @@ function App() {
             <Route path="/ai-assistant" element={<AiAssistant />} />
             <Route path="/type-generator" element={<TypeGenerator />} />
             <Route path="/minifier" element={<JsonMinifier />} />
+            <Route path="/prompt-builder" element={<PromptBuilder />} />
             <Route path="/escape" element={<EscapeTool />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
