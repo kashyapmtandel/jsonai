@@ -1,6 +1,6 @@
 import {
   Wand2, ShieldCheck, ArrowLeftRight, GitCompare,
-  Search, FileJson, TreePine, Sparkles, Lock, Code2
+  Search, FileJson, TreePine, Sparkles, Lock, Code2, Minimize2
 } from 'lucide-react';
 
 const tools = [
@@ -17,6 +17,13 @@ const tools = [
     icon: Code2,
     to: '/type-generator',
     color: '#3b82f6',
+  },
+  {
+    title: 'JSON Minifier',
+    description: 'Strip whitespace from JSON to save LLM tokens and reduce GPT-4, Claude, and Gemini API costs.',
+    icon: Minimize2,
+    to: '/minifier',
+    color: '#f97316',
   },
   {
     title: 'JSON Formatter',

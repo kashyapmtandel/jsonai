@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Braces, Sun, Moon, Menu, X } from 'lucide-react';
+import { Braces, Sun, Moon, Menu, X, Minimize2 } from 'lucide-react';
 import tools from '../data/tools';
 import './Navbar.css';
 

@@ -19,6 +19,7 @@
     "JSON Schema Generator",
     "JSONPath Explorer",
     "AI JSON Assistant (Gemini & OpenAI)",
-    "AI Type and Validation Generator (TypeScript, Zod, Python, PHP, Go, Rust)"
+    "AI Type and Validation Generator (TypeScript, Zod, Python, PHP, Go, Rust)",
+    "JSON Minifier for LLM Token Savings (GPT-4, Claude, Gemini)"
   ]
 }
