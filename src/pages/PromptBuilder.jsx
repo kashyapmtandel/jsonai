@@ -150,16 +150,27 @@ export default function PromptBuilder() {
             </div>
             <p className="ai-config-note">
               🔒 Your API key is stored only in your browser&apos;s localStorage. It is never sent to our servers.
-              {!isConfigured && (
-                <span className="ai-setup-links" style={{ display: 'inline-flex', gap: 12, marginTop: 8 }}>
-                  <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Get Gemini Key →</a>
-                  <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer">Get OpenAI Key →</a>
-                </span>
-              )}
             </p>
           </div>
         )}
       </div>
+
+      {/* Prominent Get Key card — shown only when not configured */}
+      {!isConfigured && (
+        <div className="ai-setup-card">
+          <Sparkles size={32} />
+          <h3>Get a free API key to start compressing prompts</h3>
+          <p>This tool uses AI to semantically compress your prompts. It takes less than 2 minutes to get a free key.</p>
+          <div className="ai-setup-links">
+            <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+              <Key size={15} /> Get Gemini API Key (Free)
+            </a>
+            <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+              <Key size={15} /> Get OpenAI API Key
+            </a>
+          </div>
+        </div>
+      )}
 
       {/* Sample prompts */}
       <div className="pb-samples">

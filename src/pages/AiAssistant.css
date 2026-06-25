@@ -177,11 +177,14 @@
 
 .ai-setup-links {
   display: flex;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 12px;
   justify-content: center;
+  margin-top: 4px;
 }
 
-.ai-setup-links a {
+/* When used as plain text links (legacy) */
+.ai-setup-links a:not(.btn) {
   color: var(--accent-secondary);
   font-size: 0.9rem;
   font-weight: 600;
@@ -189,7 +192,7 @@
   transition: var(--transition-fast);
 }
 
-.ai-setup-links a:hover {
+.ai-setup-links a:not(.btn):hover {
   text-decoration: underline;
 }
 

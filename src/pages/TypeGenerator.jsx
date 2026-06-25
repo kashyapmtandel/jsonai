@@ -172,11 +172,15 @@ export default function TypeGenerator() {
       {!isConfigured && (
         <div className="ai-setup-card">
           <Sparkles size={32} />
-          <h3>Configure your AI provider</h3>
-          <p>To generate types, you&apos;ll need an API key from Google Gemini or OpenAI. Click &quot;Configure API Key&quot; above to get started.</p>
+          <h3>Get a free API key to start generating types</h3>
+          <p>This tool uses AI to convert your JSON into production-ready types. Get a free key in under 2 minutes.</p>
           <div className="ai-setup-links">
-            <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Get Gemini API Key →</a>
-            <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer">Get OpenAI API Key →</a>
+            <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+              <Key size={15} /> Get Gemini API Key (Free)
+            </a>
+            <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+              <Key size={15} /> Get OpenAI API Key
+            </a>
           </div>
         </div>
       )}
