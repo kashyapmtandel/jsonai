@@ -18,6 +18,7 @@
     "JSON Diff and Compare",
     "JSON Schema Generator",
     "JSONPath Explorer",
-    "AI JSON Assistant (Gemini & OpenAI)"
+    "AI JSON Assistant (Gemini & OpenAI)",
+    "AI Type and Validation Generator (TypeScript, Zod, Python, PHP, Go, Rust)"
   ]
 }

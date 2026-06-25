@@ -15,6 +15,7 @@ import PathFinder from './pages/PathFinder'
 import SchemaGenerator from './pages/SchemaGenerator'
 import TreeEditor from './pages/TreeEditor'
 import AiAssistant from './pages/AiAssistant'
+import TypeGenerator from './pages/TypeGenerator'
 import EscapeTool from './pages/EscapeTool'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
@@ -39,6 +40,7 @@ function App() {
             <Route path="/schema" element={<SchemaGenerator />} />
             <Route path="/editor" element={<TreeEditor />} />
             <Route path="/ai-assistant" element={<AiAssistant />} />
+            <Route path="/type-generator" element={<TypeGenerator />} />
             <Route path="/escape" element={<EscapeTool />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />

@@ -15,6 +15,7 @@ import {
   TreePine,
   Sparkles,
   Lock,
+  Code2
 } from 'lucide-react';
 import './Navbar.css';
 
@@ -26,6 +27,7 @@ const navItems = [
   { to: '/diff', label: 'Diff', icon: GitCompare },
   { to: '/path-finder', label: 'Path Finder', icon: Search },
   { to: '/schema', label: 'Schema', icon: FileJson },
+  { to: '/type-generator', label: 'Type Gen', icon: Code2 },
   { to: '/editor', label: 'Tree Editor', icon: TreePine },
   { to: '/escape', label: 'Escape', icon: Lock },
 ];

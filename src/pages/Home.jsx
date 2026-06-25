@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import ToolCard from '../components/ToolCard';
 import {
   Wand2, ShieldCheck, ArrowLeftRight, GitCompare,
-  Search, FileJson, TreePine, Sparkles, Lock
+  Search, FileJson, TreePine, Sparkles, Lock, Code2
 } from 'lucide-react';
 import './Home.css';
 
@@ -14,6 +14,13 @@ const tools = [
     icon: Sparkles,
     to: '/ai-assistant',
     color: '#8b5cf6',
+  },
+  {
+    title: 'Type Generator',
+    description: 'Instantly convert JSON into production-ready TypeScript, Zod, Python, Go, Rust, and PHP.',
+    icon: Code2,
+    to: '/type-generator',
+    color: '#3b82f6',
   },
   {
     title: 'JSON Formatter',
