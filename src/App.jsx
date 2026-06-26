@@ -30,7 +30,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <main style={{ flex: 1, minHeight: 'calc(100vh - 140px)' }}>
+      <main style={{ flex: 1, minHeight: 'calc(100vh - 112px)', paddingTop: '56px' }}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />

@@ -12,15 +12,20 @@ import './CodeEditor.css';
 const CodeEditor = ({ value, onChange, readOnly = false, placeholder = 'Paste your JSON here...', height = '400px', language = 'json' }) => {
   const editorRef = useRef(null);
   const viewRef = useRef(null);
+  const onChangeRef = useRef(onChange);
   const themeCompartment = useRef(new Compartment());
   const globalTheme = useThemeObserver();
+
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  }, [onChange]);
 
   useEffect(() => {
     if (!editorRef.current) return;
 
     const updateListener = EditorView.updateListener.of((update) => {
-      if (update.docChanged && onChange) {
-        onChange(update.state.doc.toString());
+      if (update.docChanged && onChangeRef.current) {
+        onChangeRef.current(update.state.doc.toString());
       }
     });
 
@@ -84,6 +89,7 @@ const CodeEditor = ({ value, onChange, readOnly = false, placeholder = 'Paste yo
       if (currentValue !== value) {
         view.dispatch({
           changes: { from: 0, to: currentValue.length, insert: value },
+          selection: view.state.selection,
         });
       }
     }

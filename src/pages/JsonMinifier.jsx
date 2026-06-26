@@ -87,6 +87,7 @@ export default function JsonMinifier() {
 
   const handleSample = () => {
     setInput(SAMPLE_JSON);
+    setError('');
     minify(SAMPLE_JSON);
   };
 
