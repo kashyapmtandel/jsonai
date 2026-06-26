@@ -70,19 +70,45 @@ const routes = [
   },
 ];
 
+const escapeHtml = (value) =>
+  String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
 const replaceMeta = (html, replacements) => {
   let updated = html;
-  for (const { selector, value } of replacements) {
-    switch (selector) {
-      case 'title':
-        updated = updated.replace(/<title>.*?<\/title>/i, `<title>${value}</title>`);
-        break;
-      default:
-        updated = updated.replace(
-          new RegExp(`(<${selector}[^>]+content=")[^"]*("[^>]*>)`, 'i'),
-          `$1${value}$2`
-        );
+  for (const { tag, attr, attrValue, value, contentAttr = 'content' } of replacements) {
+    if (tag === 'title') {
+      updated = updated.replace(/<title>.*?<\/title>/i, `<title>${escapeHtml(value)}</title>`);
+      continue;
     }
+
+    const anchor = `${attr}="${attrValue}"`;
+    const anchorIndex = updated.indexOf(anchor);
+    if (anchorIndex === -1) {
+      console.warn(`Meta tag not found: <${tag} ${anchor}>`);
+      continue;
+    }
+
+    const start = updated.lastIndexOf('<', anchorIndex);
+    const end = updated.indexOf('>', anchorIndex);
+    if (start === -1 || end === -1) {
+      console.warn(`Could not locate full tag for <${tag} ${anchor}>`);
+      continue;
+    }
+
+    const tagText = updated.slice(start, end + 1);
+    const attrPattern = new RegExp(`\\b${contentAttr}=(['"])(.*?)\\1`, 'i');
+    if (!attrPattern.test(tagText)) {
+      console.warn(`Attribute ${contentAttr} not found on <${tag} ${anchor}>`);
+      continue;
+    }
+
+    const replacementTag = tagText.replace(attrPattern, `${contentAttr}=$1${escapeHtml(value)}$1`);
+    updated = updated.slice(0, start) + replacementTag + updated.slice(end + 1);
   }
   return updated;
 };
@@ -94,14 +120,15 @@ const createRouteFile = ({ route, title, description }) => {
 
   const pageUrl = `${siteUrl}${route}`;
   const html = replaceMeta(indexHtml, [
-    { selector: 'title', value: title },
-    { selector: 'meta name="description"', value: description },
-    { selector: 'meta property="og:title"', value: title },
-    { selector: 'meta property="og:description"', value: description },
-    { selector: 'meta name="twitter:title"', value: title },
-    { selector: 'meta name="twitter:description"', value: description },
-    { selector: 'meta property="og:url"', value: pageUrl },
-    { selector: 'link rel="canonical"', value: pageUrl },
+    { tag: 'title', value: title },
+    { tag: 'meta', attr: 'name', attrValue: 'description', value: description },
+    { tag: 'meta', attr: 'property', attrValue: 'og:title', value: title },
+    { tag: 'meta', attr: 'property', attrValue: 'og:description', value: description },
+    { tag: 'meta', attr: 'property', attrValue: 'og:url', value: pageUrl },
+    { tag: 'meta', attr: 'property', attrValue: 'twitter:title', value: title },
+    { tag: 'meta', attr: 'property', attrValue: 'twitter:description', value: description },
+    { tag: 'meta', attr: 'property', attrValue: 'twitter:url', value: pageUrl },
+    { tag: 'link', attr: 'rel', attrValue: 'canonical', value: pageUrl, contentAttr: 'href' },
   ]);
 
   fs.writeFileSync(path.join(targetDir, 'index.html'), html, 'utf8');
