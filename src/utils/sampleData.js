@@ -1,5 +1,5 @@
 export const sampleJson = `{
-  "name": "JSON Tools",
+  "name": "JSON AI",
   "version": "1.0.0",
   "description": "The ultimate online JSON toolkit",
   "features": [
@@ -15,8 +15,8 @@ export const sampleJson = `{
   ],
   "author": {
     "name": "Developer",
-    "email": "dev@example.com",
-    "website": "https://jsontools.dev"
+    "email": "dev@jsonai.online",
+    "website": "https://jsonai.online"
   },
   "stats": {
     "tools": 9,
@@ -31,21 +31,21 @@ export const sampleJsonArray = `[
   {
     "id": 1,
     "name": "Alice Johnson",
-    "email": "alice@example.com",
+    "email": "alice@jsonai.online",
     "role": "Admin",
     "active": true
   },
   {
     "id": 2,
     "name": "Bob Smith",
-    "email": "bob@example.com",
+    "email": "bob@jsonai.online",
     "role": "Editor",
     "active": true
   },
   {
     "id": 3,
     "name": "Charlie Brown",
-    "email": "charlie@example.com",
+    "email": "charlie@jsonai.online",
     "role": "Viewer",
     "active": false
   }

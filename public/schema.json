@@ -3,7 +3,7 @@
   "@type": "WebApplication",
   "name": "JSON AI",
   "url": "https://jsonai.online",
-  "description": "A suite of free, client-side JSON tools including a formatter, validator, converter, diff checker, and an AI-powered JSON assistant.",
+  "description": "A suite of free, client-side JSON AI tools including a formatter, validator, converter, diff checker, and an AI-powered JSON assistant.",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "All",
   "offers": {

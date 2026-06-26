@@ -68,7 +68,7 @@ const SchemaGenerator = () => {
 
   const sampleValJson = JSON.stringify({
     name: "Alice",
-    email: "alice@example.com",
+    email: "alice@jsonai.online",
     age: 30
   }, null, 2);
 

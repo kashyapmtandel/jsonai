@@ -23,7 +23,7 @@ const SAMPLE_JSON = `{
   "user": {
     "id": "usr_8f3k2",
     "name": "Jordan Lee",
-    "email": "jordan@example.com",
+    "email": "jordan@jsonai.online",
     "role": "admin",
     "preferences": {
       "theme": "dark",

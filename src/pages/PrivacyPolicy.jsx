@@ -14,7 +14,7 @@ export default function PrivacyPolicy() {
         <section>
           <h2>1. Introduction</h2>
           <p>
-            Welcome to JSON Tools. We respect your privacy and are committed to protecting it. 
+            Welcome to JSON AI. We respect your privacy and are committed to protecting it. 
             Because of the technical architecture of our application, we collect absolutely no 
             personal data or JSON data that you process.
           </p>

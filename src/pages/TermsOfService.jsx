@@ -14,14 +14,14 @@ export default function TermsOfService() {
         <section>
           <h2>1. Acceptance of Terms</h2>
           <p>
-            By accessing and using JSON Tools, you accept and agree to be bound by the terms and provision of this agreement.
+            By accessing and using JSON AI, you accept and agree to be bound by the terms and provision of this agreement.
           </p>
         </section>
 
         <section>
           <h2>2. Use of Service</h2>
           <p>
-            JSON Tools provides a suite of client-side web utilities for developers. The service is provided "as is" and 
+            JSON AI provides a suite of client-side web utilities for developers. The service is provided "as is" and 
             is completely free to use for personal and commercial purposes.
           </p>
           <ul>
@@ -44,7 +44,7 @@ export default function TermsOfService() {
         <section>
           <h2>4. Limitation of Liability</h2>
           <p>
-            In no event shall JSON Tools or its creators be liable for any direct, indirect, incidental, special, or consequential 
+            In no event shall JSON AI or its creators be liable for any direct, indirect, incidental, special, or consequential 
             damages resulting from the use or inability to use the service, including but not limited to reliance on information 
             obtained from the service, mistakes, omissions, interruptions, or errors.
           </p>

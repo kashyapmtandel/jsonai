@@ -14,7 +14,7 @@ export default function Contact() {
           <h2>Get in Touch</h2>
           <p>
             Have a question, feature request, or found a bug? We'd love to hear from you! 
-            We are constantly improving JSON Tools to make it the best developer utility on the web.
+            We are constantly improving JSON AI to make it the best developer utility on the web.
           </p>
           
           <div className="contact-box">
