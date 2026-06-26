@@ -22,14 +22,14 @@ const LLM_MODELS = [
 const SAMPLE_JSON = `{
   "user": {
     "id": "usr_8f3k2",
-    "name": "Kashyap Tandel",
-    "email": "kashyap@example.com",
+    "name": "Jordan Lee",
+    "email": "jordan@example.com",
     "role": "admin",
     "preferences": {
       "theme": "dark",
       "language": "en",
       "notifications": true,
-      "timezone": "Asia/Kolkata"
+      "timezone": "America/New_York"
     },
     "createdAt": "2024-01-15T10:30:00Z"
   },
