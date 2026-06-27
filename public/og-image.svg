@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0e1a"/>
+  
+  <!-- Decorative orbs -->
+  <circle cx="150" cy="100" r="120" fill="url(#grad)" opacity="0.1"/>
+  <circle cx="1100" cy="550" r="150" fill="url(#grad)" opacity="0.08"/>
+  
+  <!-- Main content -->
+  <g>
+    <!-- Braces icon -->
+    <text x="600" y="280" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="140" fill="url(#grad)">{ }</text>
+    
+    <!-- Main heading -->
+    <text x="600" y="380" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="72" fill="#ffffff">JSON AI</text>
+    
+    <!-- Subtitle -->
+    <text x="600" y="450" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="36" fill="#94a3b8">The Ultimate JSON Toolkit</text>
+    
+    <!-- Features tagline -->
+    <text x="600" y="520" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="24" fill="#64748b">Free • Fast • AI-Powered • Privacy First</text>
+  </g>
+</svg>
