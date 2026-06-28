@@ -8,6 +8,7 @@ import TabGroup from '../components/TabGroup';
 import { BotMessageSquare, Trash2, Send, Key, ChevronDown, ChevronUp, Eye, EyeOff, Zap, Hash, Sparkles } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { callGemini, callOpenAI } from '../utils/ai';
+import './AiAssistant.css';
 import './PromptBuilder.css';
 
 const estimateTokens = (str) => Math.ceil((str || '').length / 4);
@@ -117,7 +118,7 @@ export default function PromptBuilder() {
           <Key size={16} />
           <span>{isConfigured ? `API Key configured (${provider === 'gemini' ? 'Gemini' : 'OpenAI'})` : 'Configure API Key'}</span>
           <span className={`ai-config-status ${isConfigured ? 'configured' : ''}`}>
-            {isConfigured ? '●' : '○'}
+            <span className="ai-config-dot" aria-hidden="true" />
           </span>
           {showConfig ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </button>
@@ -150,7 +151,7 @@ export default function PromptBuilder() {
               </div>
             </div>
             <p className="ai-config-note">
-              🔒 Your API key is stored only in your browser&apos;s localStorage. It is never sent to our servers.
+              Your API key is stored only in your browser&apos;s localStorage. It is never sent to our servers.
             </p>
           </div>
         )}
@@ -208,7 +209,7 @@ export default function PromptBuilder() {
           </div>
           {savedPct && (
             <div className="pb-stat pb-stat--saved">
-              <span>🎉 <strong>{savedPct}% fewer tokens</strong> — saved {savedTokens.toLocaleString()} tokens</span>
+              <span><strong>{savedPct}% fewer tokens</strong> - saved {savedTokens.toLocaleString()} tokens</span>
             </div>
           )}
         </div>

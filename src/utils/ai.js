@@ -1,4 +1,8 @@
+const formatNetworkError = (provider) => (
+  `${provider} request failed. Check your API key, internet connection, browser ad-blocker, and Content Security Policy settings.`
+);
 export const callGemini = async (apiKey, systemPrompt, userMessage) => {
+  try {
   // 1. Dynamically fetch available models for this specific API Key
   const modelsRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
   if (!modelsRes.ok) {
@@ -59,9 +63,14 @@ export const callGemini = async (apiKey, systemPrompt, userMessage) => {
   
   const data = await response.json();
   return data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response generated.';
+  } catch (error) {
+    if (error instanceof TypeError) throw new Error(formatNetworkError('Gemini'));
+    throw error;
+  }
 };
 
 export const callOpenAI = async (apiKey, systemPrompt, userMessage) => {
+  try {
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -85,4 +94,8 @@ export const callOpenAI = async (apiKey, systemPrompt, userMessage) => {
   
   const data = await response.json();
   return data.choices?.[0]?.message?.content || 'No response generated.';
+  } catch (error) {
+    if (error instanceof TypeError) throw new Error(formatNetworkError('OpenAI'));
+    throw error;
+  }
 };

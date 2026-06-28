@@ -7,84 +7,84 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/ai-assistant</loc>
+    <loc>https://jsonai.online/ai-assistant/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/type-generator</loc>
+    <loc>https://jsonai.online/type-generator/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/minifier</loc>
+    <loc>https://jsonai.online/minifier/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/prompt-builder</loc>
+    <loc>https://jsonai.online/prompt-builder/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/formatter</loc>
+    <loc>https://jsonai.online/formatter/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/validator</loc>
+    <loc>https://jsonai.online/validator/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/converter</loc>
+    <loc>https://jsonai.online/converter/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/diff</loc>
+    <loc>https://jsonai.online/diff/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/path-finder</loc>
+    <loc>https://jsonai.online/path-finder/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/schema</loc>
+    <loc>https://jsonai.online/schema/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/editor</loc>
+    <loc>https://jsonai.online/editor/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/escape</loc>
+    <loc>https://jsonai.online/escape/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Legal & Info Pages -->
   <url>
-    <loc>https://jsonai.online/about</loc>
+    <loc>https://jsonai.online/about/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/contact</loc>
+    <loc>https://jsonai.online/contact/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/privacy</loc>
+    <loc>https://jsonai.online/privacy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://jsonai.online/terms</loc>
+    <loc>https://jsonai.online/terms/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>

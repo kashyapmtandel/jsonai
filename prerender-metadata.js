@@ -143,7 +143,7 @@ const createRouteFile = ({ route, title, description }) => {
   const targetDir = path.join(distDir, routePath);
   fs.mkdirSync(targetDir, { recursive: true });
 
-  const pageUrl = `${siteUrl}${route}`;
+  const pageUrl = `${siteUrl}${route}/`;
   const html = replaceMeta(indexHtml, [
     { tag: 'title', value: title },
     { tag: 'meta', attr: 'name', attrValue: 'description', value: description },

@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; upgrade-insecure-requests;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://generativelanguage.googleapis.com https://api.openai.com; frame-ancestors 'none'; upgrade-insecure-requests;" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -40,33 +40,51 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "JSON AI",
-      "url": "https://jsonai.online",
-      "description": "A suite of free, client-side JSON AI tools including a formatter, validator, converter, diff checker, and an AI-powered JSON assistant.",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "All",
-      "inLanguage": "en-US",
-      "author": {
-        "@type": "Organization",
-        "name": "JSON AI"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "featureList": [
-        "JSON Formatter and Beautifier",
-        "JSON Validator and Fixer",
-        "JSON Converter",
-        "JSON Diff and Compare",
-        "JSON Schema Generator",
-        "AI JSON Assistant"
-      ]
-    }
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "JSON AI",
+  "alternateName": "JSON Tools",
+  "url": "https://jsonai.online/",
+  "description": "A suite of free, client-side JSON tools including a formatter, validator, converter, diff checker, schema generator, and AI-powered JSON assistant.",
+  "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "JSON developer tools",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript and a modern web browser.",
+  "softwareHelp": "https://jsonai.online/contact/",
+  "image": "https://jsonai.online/og-image.svg",
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true,
+  "publisher": {
+    "@type": "Organization",
+    "name": "JSON AI",
+    "url": "https://jsonai.online/"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "JSON AI",
+    "url": "https://jsonai.online/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://jsonai.online/",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "featureList": [
+    "JSON Formatter and Beautifier",
+    "JSON Validator and Fixer",
+    "JSON Converter for CSV, XML, YAML, and TOML",
+    "JSON Diff and Compare",
+    "JSON Schema Generator",
+    "JSONPath Explorer",
+    "AI JSON Assistant",
+    "AI Type and Validation Generator",
+    "JSON Minifier for LLM token savings",
+    "JSON Prompt Builder"
+  ]
+}
   </script>
   <style>
     .app-shell-fallback {
@@ -119,22 +137,22 @@
     </section>
     <nav class="fallback-seo-links" aria-label="JSON AI tools">
       <a href="/">Home</a>
-      <a href="/ai-assistant">AI Assistant</a>
-      <a href="/prompt-builder">JSON Prompt Builder</a>
-      <a href="/type-generator">Type Generator</a>
-      <a href="/schema">Schema Generator</a>
-      <a href="/minifier">JSON Minifier</a>
-      <a href="/formatter">JSON Formatter</a>
-      <a href="/validator">JSON Validator</a>
-      <a href="/converter">JSON Converter</a>
-      <a href="/diff">JSON Diff</a>
-      <a href="/path-finder">Path Finder</a>
-      <a href="/editor">Tree Editor</a>
-      <a href="/escape">JSON Escape Tool</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms of Service</a>
+      <a href="/ai-assistant/">AI Assistant</a>
+      <a href="/prompt-builder/">JSON Prompt Builder</a>
+      <a href="/type-generator/">Type Generator</a>
+      <a href="/schema/">Schema Generator</a>
+      <a href="/minifier/">JSON Minifier</a>
+      <a href="/formatter/">JSON Formatter</a>
+      <a href="/validator/">JSON Validator</a>
+      <a href="/converter/">JSON Converter</a>
+      <a href="/diff/">JSON Diff</a>
+      <a href="/path-finder/">Path Finder</a>
+      <a href="/editor/">Tree Editor</a>
+      <a href="/escape/">JSON Escape Tool</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Service</a>
     </nav>
   </div>
   <script type="module" src="/src/main.jsx"></script>

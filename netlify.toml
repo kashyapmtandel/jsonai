@@ -6,7 +6,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://generativelanguage.googleapis.com https://api.openai.com; frame-ancestors 'none'; upgrade-insecure-requests;"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
@@ -25,109 +25,13 @@
 
 [[redirects]]
   from = "/:path/index.html"
-  to = "/:path"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/formatter/"
-  to = "/formatter"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/validator/"
-  to = "/validator"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/converter/"
-  to = "/converter"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/diff/"
-  to = "/diff"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/path-finder/"
-  to = "/path-finder"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/schema/"
-  to = "/schema"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/editor/"
-  to = "/editor"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/ai-assistant/"
-  to = "/ai-assistant"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/type-generator/"
-  to = "/type-generator"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/minifier/"
-  to = "/minifier"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/prompt-builder/"
-  to = "/prompt-builder"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/escape/"
-  to = "/escape"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/privacy/"
-  to = "/privacy"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/terms/"
-  to = "/terms"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/about/"
-  to = "/about"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/contact/"
-  to = "/contact"
+  to = "/:path/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/schema-generator"
-  to = "/schema"
+  to = "/schema/"
   status = 301
   force = true
 

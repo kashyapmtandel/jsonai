@@ -48,23 +48,23 @@ function App() {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
-            <Route path="/formatter" element={<Formatter />} />
-            <Route path="/validator" element={<Validator />} />
-            <Route path="/converter" element={<Converter />} />
-            <Route path="/diff" element={<DiffTool />} />
-            <Route path="/path-finder" element={<PathFinder />} />
-            <Route path="/schema" element={<SchemaGenerator />} />
-            <Route path="/schema-generator" element={<Navigate to="/schema" replace />} />
-            <Route path="/editor" element={<TreeEditor />} />
-            <Route path="/ai-assistant" element={<AiAssistant />} />
-            <Route path="/type-generator" element={<TypeGenerator />} />
-            <Route path="/minifier" element={<JsonMinifier />} />
-            <Route path="/prompt-builder" element={<PromptBuilder />} />
-            <Route path="/escape" element={<EscapeTool />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsOfService />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/formatter/" element={<Formatter />} />
+            <Route path="/validator/" element={<Validator />} />
+            <Route path="/converter/" element={<Converter />} />
+            <Route path="/diff/" element={<DiffTool />} />
+            <Route path="/path-finder/" element={<PathFinder />} />
+            <Route path="/schema/" element={<SchemaGenerator />} />
+            <Route path="/schema-generator" element={<Navigate to="/schema/" replace />} />
+            <Route path="/editor/" element={<TreeEditor />} />
+            <Route path="/ai-assistant/" element={<AiAssistant />} />
+            <Route path="/type-generator/" element={<TypeGenerator />} />
+            <Route path="/minifier/" element={<JsonMinifier />} />
+            <Route path="/prompt-builder/" element={<PromptBuilder />} />
+            <Route path="/escape/" element={<EscapeTool />} />
+            <Route path="/privacy/" element={<PrivacyPolicy />} />
+            <Route path="/terms/" element={<TermsOfService />} />
+            <Route path="/about/" element={<About />} />
+            <Route path="/contact/" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
             </Routes>
           </AnimatePresence>

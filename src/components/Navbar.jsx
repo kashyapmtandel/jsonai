@@ -4,7 +4,7 @@ import { Braces, Sun, Moon, Menu, X, ChevronDown } from 'lucide-react';
 import tools from '../data/tools';
 import './Navbar.css';
 
-const primaryRoutes = ['/ai-assistant', '/prompt-builder', '/type-generator', '/schema'];
+const primaryRoutes = ['/ai-assistant/', '/prompt-builder/', '/type-generator/', '/schema/'];
 const primaryNavItems = tools.filter((t) => primaryRoutes.includes(t.to));
 const moreNavItems = tools.filter((t) => !primaryRoutes.includes(t.to));
 

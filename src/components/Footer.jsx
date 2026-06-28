@@ -15,21 +15,24 @@ const Footer = () => {
             <Heart size={14} className="footer-heart" fill="currentColor" />{' '}
             by the JSON AI Team &copy; {year}
           </p>
-          <div className="footer-links">
-            <RouteLink to="/about">About Us</RouteLink>
-            <RouteLink to="/contact">Contact</RouteLink>
-            <RouteLink to="/privacy">Privacy Policy</RouteLink>
-            <RouteLink to="/terms">Terms of Service</RouteLink>
-          </div>
+          <nav className="footer-links" aria-label="Company links">
+            <RouteLink to="/about/">About</RouteLink>
+            <RouteLink to="/contact/">Contact</RouteLink>
+            <RouteLink to="/privacy/">Privacy</RouteLink>
+            <RouteLink to="/terms/">Terms</RouteLink>
+            <a href="https://x.com/jsonaitools" target="_blank" rel="noopener noreferrer">Follow on X</a>
+          </nav>
         </div>
-        <nav className="footer-tool-links" aria-label="JSON tools">
-          {tools.map(({ to, title }) => (
-            <RouteLink key={to} to={to}>{title}</RouteLink>
-          ))}
-        </nav>
-        <div className="footer-social" aria-label="Social media">
-          <a href="https://x.com/jsonaitools" target="_blank" rel="noopener noreferrer">X</a>
+
+        <div className="footer-tools-group">
+          <span className="footer-tools-label">Tools</span>
+          <nav className="footer-tool-links" aria-label="JSON tools">
+            {tools.map(({ to, title }) => (
+              <RouteLink key={to} to={to}>{title}</RouteLink>
+            ))}
+          </nav>
         </div>
+
         <p className="footer-privacy">
           All processing happens in your browser &mdash; your data never leaves your machine.
         </p>

@@ -1,26 +1,45 @@
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
+  "@type": "SoftwareApplication",
   "name": "JSON AI",
-  "url": "https://jsonai.online",
-  "description": "A suite of free, client-side JSON AI tools including a formatter, validator, converter, diff checker, and an AI-powered JSON assistant.",
+  "alternateName": "JSON Tools",
+  "url": "https://jsonai.online/",
+  "description": "A suite of free, client-side JSON tools including a formatter, validator, converter, diff checker, schema generator, and AI-powered JSON assistant.",
   "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "All",
+  "applicationSubCategory": "JSON developer tools",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript and a modern web browser.",
+  "softwareHelp": "https://jsonai.online/contact/",
+  "image": "https://jsonai.online/og-image.svg",
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true,
+  "publisher": {
+    "@type": "Organization",
+    "name": "JSON AI",
+    "url": "https://jsonai.online/"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "JSON AI",
+    "url": "https://jsonai.online/"
+  },
   "offers": {
     "@type": "Offer",
+    "url": "https://jsonai.online/",
     "price": "0",
-    "priceCurrency": "USD"
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
   },
   "featureList": [
     "JSON Formatter and Beautifier",
     "JSON Validator and Fixer",
-    "JSON Converter (CSV, XML, YAML, TOML)",
+    "JSON Converter for CSV, XML, YAML, and TOML",
     "JSON Diff and Compare",
     "JSON Schema Generator",
     "JSONPath Explorer",
-    "AI JSON Assistant (Gemini & OpenAI)",
-    "AI Type and Validation Generator (TypeScript, Zod, Python, PHP, Go, Rust)",
-    "JSON Minifier for LLM Token Savings (GPT-4, Claude, Gemini)",
-    "JSON Prompt Builder — Convert verbose prompts to compact JSON"
+    "AI JSON Assistant",
+    "AI Type and Validation Generator",
+    "JSON Minifier for LLM token savings",
+    "JSON Prompt Builder"
   ]
 }
