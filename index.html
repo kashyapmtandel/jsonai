@@ -2,19 +2,24 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; upgrade-insecure-requests;" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="JSON AI - The ultimate online JSON toolkit. Format, validate, convert, diff, and explore JSON with AI-powered features. Free, fast, and privacy-first." />
   <meta name="keywords" content="JSON, formatter, validator, converter, diff, schema, editor, tools, online" />
   <meta name="robots" content="index, follow" />
   <meta name="language" content="English" />
-  <title>JSON AI — The Ultimate Online JSON Toolkit</title>
+  <title>JSON AI - The Ultimate Online JSON Toolkit</title>
   <link rel="canonical" href="https://jsonai.online/" />
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://jsonai.online/" />
   <meta property="og:site_name" content="JSON AI" />
-  <meta property="og:title" content="JSON AI — The Ultimate Online JSON Toolkit" />
+  <meta property="og:title" content="JSON AI - The Ultimate Online JSON Toolkit" />
   <meta property="og:description" content="Format, validate, convert, diff, and explore JSON with AI-powered features. Free, fast, and privacy-first." />
   <meta property="og:image" content="https://jsonai.online/og-image.svg" />
   <meta property="og:image:width" content="1200" />
@@ -25,7 +30,7 @@
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:site" content="@jsonaitools" />
   <meta property="twitter:url" content="https://jsonai.online/" />
-  <meta property="twitter:title" content="JSON AI — The Ultimate Online JSON Toolkit" />
+  <meta property="twitter:title" content="JSON AI - The Ultimate Online JSON Toolkit" />
   <meta property="twitter:description" content="Format, validate, convert, diff, and explore JSON with AI-powered features. Free, fast, and privacy-first." />
   <meta property="twitter:image" content="https://jsonai.online/og-image.svg" />
   
@@ -65,7 +70,31 @@
   </script>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <section aria-labelledby="fallback-tools-heading">
+      <h2 id="fallback-tools-heading">JSON Tools</h2>
+      <p>Format, validate, convert, compare, and explore JSON with free browser-based tools.</p>
+    </section>
+    <nav aria-label="JSON AI tools">
+      <a href="/">Home</a>
+      <a href="/ai-assistant">AI Assistant</a>
+      <a href="/prompt-builder">JSON Prompt Builder</a>
+      <a href="/type-generator">Type Generator</a>
+      <a href="/schema">Schema Generator</a>
+      <a href="/minifier">JSON Minifier</a>
+      <a href="/formatter">JSON Formatter</a>
+      <a href="/validator">JSON Validator</a>
+      <a href="/converter">JSON Converter</a>
+      <a href="/diff">JSON Diff</a>
+      <a href="/path-finder">Path Finder</a>
+      <a href="/editor">Tree Editor</a>
+      <a href="/escape">JSON Escape Tool</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </nav>
+  </div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>

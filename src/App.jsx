@@ -23,6 +23,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 
 function App() {
   const location = useLocation()
@@ -51,6 +52,7 @@ function App() {
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
       </main>

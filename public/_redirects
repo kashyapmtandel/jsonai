@@ -1,1 +1,23 @@
-/* /index.html 200
+# Normalize trailing slash URLs to the canonical no-slash version
+/formatter/ /formatter 301!
+/validator/ /validator 301!
+/converter/ /converter 301!
+/diff/ /diff 301!
+/path-finder/ /path-finder 301!
+/schema/ /schema 301!
+/schema-generator /schema 301!
+/schema-generator/ /schema 301!
+/editor/ /editor 301!
+/ai-assistant/ /ai-assistant 301!
+/type-generator/ /type-generator 301!
+/minifier/ /minifier 301!
+/prompt-builder/ /prompt-builder 301!
+/escape/ /escape 301!
+/privacy/ /privacy 301!
+/terms/ /terms 301!
+/about/ /about 301!
+/contact/ /contact 301!
+
+# Serve the generated 404 page for unknown URLs
+/test_error_page_url /404.html 404!
+/* /404.html 404
