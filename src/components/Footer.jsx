@@ -1,5 +1,6 @@
 import RouteLink from './RouteLink';
 import { Heart } from 'lucide-react';
+import tools from '../data/tools';
 import './Footer.css';
 
 const Footer = () => {
@@ -21,8 +22,16 @@ const Footer = () => {
             <RouteLink to="/terms">Terms of Service</RouteLink>
           </div>
         </div>
+        <nav className="footer-tool-links" aria-label="JSON tools">
+          {tools.map(({ to, title }) => (
+            <RouteLink key={to} to={to}>{title}</RouteLink>
+          ))}
+        </nav>
+        <div className="footer-social" aria-label="Social media">
+          <a href="https://x.com/jsonaitools" target="_blank" rel="noopener noreferrer">X</a>
+        </div>
         <p className="footer-privacy">
-          🔒 All processing happens in your browser &mdash; your data never leaves your machine.
+          All processing happens in your browser &mdash; your data never leaves your machine.
         </p>
       </div>
     </footer>

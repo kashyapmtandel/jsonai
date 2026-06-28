@@ -68,9 +68,9 @@ const Home = () => {
           ))}
         </div>
       </motion.section>
-
       {/* Tools Grid */}
-      <section className="tools-section">
+      <section className="tools-section" aria-labelledby="tools-heading">
+        <h2 id="tools-heading" className="sr-only">Free browser-based JSON tools</h2>
         <div className="tools-grid">
           {filtered.map((tool, i) => (
             <motion.div

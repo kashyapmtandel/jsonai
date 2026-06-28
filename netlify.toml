@@ -1,7 +1,7 @@
 [build]
   command = "npm run build"
   publish = "dist"
-  environment = { NODE_VERSION = "20" }
+  environment = { NODE_VERSION = "20.19.0" }
 
 [[headers]]
   for = "/*"
@@ -26,6 +26,102 @@
 [[redirects]]
   from = "/:path/index.html"
   to = "/:path"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/formatter/"
+  to = "/formatter"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/validator/"
+  to = "/validator"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/converter/"
+  to = "/converter"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/diff/"
+  to = "/diff"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/path-finder/"
+  to = "/path-finder"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/schema/"
+  to = "/schema"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/editor/"
+  to = "/editor"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ai-assistant/"
+  to = "/ai-assistant"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/type-generator/"
+  to = "/type-generator"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/minifier/"
+  to = "/minifier"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/prompt-builder/"
+  to = "/prompt-builder"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/escape/"
+  to = "/escape"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy/"
+  to = "/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms/"
+  to = "/terms"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about/"
+  to = "/about"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact/"
+  to = "/contact"
   status = 301
   force = true
 

@@ -34,6 +34,11 @@ const routes = [
     description: 'Generate JSON Schema from sample data and validate JSON against schema definitions.',
   },
   {
+    route: '/minifier',
+    title: 'JSON Minifier | JSON AI',
+    description: 'Minify JSON to remove whitespace, reduce payload size, and save tokens in AI prompts.',
+  },
+  {
     route: '/formatter',
     title: 'JSON Formatter | JSON AI',
     description: 'Beautify, minify, and reformat JSON with customizable indentation and style options.',
@@ -67,6 +72,26 @@ const routes = [
     route: '/escape',
     title: 'JSON Escape Tool | JSON AI',
     description: 'Escape and unescape JSON strings for safe embedding in code and data formats.',
+  },
+  {
+    route: '/about',
+    title: 'About JSON AI | JSON AI',
+    description: 'Learn about JSON AI, a fast privacy-first toolkit for formatting, validating, converting, and exploring JSON.',
+  },
+  {
+    route: '/contact',
+    title: 'Contact JSON AI | JSON AI',
+    description: 'Contact the JSON AI team with feedback, support questions, and product suggestions.',
+  },
+  {
+    route: '/privacy',
+    title: 'Privacy Policy | JSON AI',
+    description: 'Read how JSON AI protects your privacy with client-side JSON tools and local browser processing.',
+  },
+  {
+    route: '/terms',
+    title: 'Terms of Service | JSON AI',
+    description: 'Review the terms for using JSON AI browser-based JSON tools and AI-assisted utilities.',
   },
 ];
 
@@ -137,6 +162,18 @@ const createRouteFile = ({ route, title, description }) => {
 for (const routeData of routes) {
   createRouteFile(routeData);
 }
+
+const create404File = () => {
+  const html = replaceMeta(indexHtml, [
+    { tag: 'title', value: '404 Page Not Found | JSON AI' },
+    { tag: 'meta', attr: 'name', attrValue: 'description', value: 'The requested JSON AI page could not be found.' },
+    { tag: 'link', attr: 'rel', attrValue: 'canonical', value: siteUrl, contentAttr: 'href' },
+  ]).replace('</head>', '  <meta name="robots" content="noindex, follow" />\n</head>');
+
+  fs.writeFileSync(path.join(distDir, '404.html'), html, 'utf8');
+};
+
+create404File();
 
 console.log('Prerendered metadata pages generated for routes:');
 console.log(routes.map((route) => route.route).join(', '));
