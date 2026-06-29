@@ -1,7 +1,5 @@
-# Redirect legacy schema-generator URLs to the canonical schema page
-/schema-generator /schema/ 301!
-/schema-generator/ /schema/ 301!
+# Redirect issue
+/*    /index.html   200
 
 # Serve the generated 404 page for unknown URLs
-/test_error_page_url /404.html 404!
-/* /404.html 404
+/* 	 /404.html      404

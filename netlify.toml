@@ -31,17 +31,12 @@
 
 [[redirects]]
   from = "/schema-generator"
-  to = "/schema/"
+  to = "/schema"
   status = 301
   force = true
 
-[[redirects]]
-  from = "/test_error_page_url"
-  to = "/404.html"
-  status = 404
-  force = true
-
+# SPA fallback — must be LAST
 [[redirects]]
   from = "/*"
-  to = "/404.html"
-  status = 404
+  to = "/index.html"
+  status = 200
