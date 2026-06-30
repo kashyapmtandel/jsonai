@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import './SeoContent.css';
 
@@ -21,7 +22,13 @@ const updateLinkHref = (selector, href) => {
 };
 
 export default function SeoContent({ title, description, features, faq }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const location = useLocation();
+  const [isExpanded, setIsExpanded] = useState(true);
+
+  useEffect(() => {
+    // Keep it open by default
+    setIsExpanded(true);
+  }, [location.pathname]);
 
   useEffect(() => {
     const originalTitle = document.title;
@@ -46,6 +53,30 @@ export default function SeoContent({ title, description, features, faq }) {
     updateMetaTag('meta[property="og:url"]', pageUrl);
     updateLinkHref('link[rel="canonical"]', pageUrl);
 
+    // Dynamic SoftwareApplication Schema.org Markup
+    const toolSchema = {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": title || "JSON AI",
+      "url": pageUrl,
+      "description": pageDescription,
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser.",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    };
+
+    const schemaScript = document.createElement('script');
+    schemaScript.type = 'application/ld+json';
+    schemaScript.id = 'dynamic-tool-schema';
+    schemaScript.text = JSON.stringify(toolSchema);
+    document.head.appendChild(schemaScript);
+
     return () => {
       document.title = originalTitle;
       updateMetaTag('meta[name="description"]', originalDescription);
@@ -55,6 +86,11 @@ export default function SeoContent({ title, description, features, faq }) {
       updateMetaTag('meta[name="twitter:description"]', originalTwitterDesc);
       updateMetaTag('meta[property="og:url"]', originalOgUrl);
       updateLinkHref('link[rel="canonical"]', originalCanonical);
+
+      const existingSchema = document.getElementById('dynamic-tool-schema');
+      if (existingSchema) {
+        existingSchema.remove();
+      }
     };
   }, [title, description]);
 
@@ -76,6 +112,7 @@ export default function SeoContent({ title, description, features, faq }) {
       {faqSchema && (
         <script
           type="application/ld+json"
+          id="dynamic-faq-schema"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       )}
@@ -88,46 +125,30 @@ export default function SeoContent({ title, description, features, faq }) {
           ))}
         </div>
 
-        {(features && features.length > 0) || (faq && faq.length > 0) ? (
-          <>
-            <button
-              className="seo-expand-btn"
-              onClick={() => setIsExpanded(!isExpanded)}
-            >
-              <span>{isExpanded ? 'Hide' : 'Read More About'} {title}</span>
-              {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-            </button>
+        {features && features.length > 0 && (
+          <div className="seo-features">
+            <h3>Key Features</h3>
+            <ul>
+              {features.map((feature, idx) => (
+                <li key={idx}>
+                  <strong>{feature.title}:</strong> {feature.desc}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
-            {isExpanded && (
-              <>
-                {features && features.length > 0 && (
-                  <div className="seo-features">
-                    <h3>Key Features</h3>
-                    <ul>
-                      {features.map((feature, idx) => (
-                        <li key={idx}>
-                          <strong>{feature.title}:</strong> {feature.desc}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {faq && faq.length > 0 && (
-                  <div className="seo-faq">
-                    <h3>Frequently Asked Questions</h3>
-                    {faq.map((item, idx) => (
-                      <div key={idx} className="faq-item">
-                        <h4>{item.q}</h4>
-                        <p>{item.a}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </>
-            )}
-          </>
-        ) : null}
+        {faq && faq.length > 0 && (
+          <div className="seo-faq">
+            <h3>Frequently Asked Questions</h3>
+            {faq.map((item, idx) => (
+              <div key={idx} className="faq-item">
+                <h4>{item.q}</h4>
+                <p>{item.a}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </article>
     </div>
   );

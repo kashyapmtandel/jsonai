@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import ToolCard from '../components/ToolCard';
 import { Search } from 'lucide-react';
 import tools from '../data/tools';
+import SeoContent from '../components/SeoContent';
 import './Home.css';
 
 const features = [
@@ -88,6 +89,24 @@ const Home = () => {
             </div>
           )}
         </div>
+		<SeoContent
+        title="JSON AI — The Ultimate Online JSON Toolkit"
+        description={[
+          "Welcome to JSON AI, your all-in-one suite of secure, client-side, and AI-powered JSON utilities. Our tools help web developers, data analysts, and engineering teams format, validate, convert, compare, minify, and query JSON payloads instantly and privately.",
+          "Every tool in the JSON AI suite executes directly in your browser. We never upload or save your sensitive JSON configurations, database models, API keys, or custom payloads. It is 100% secure, private, and optimized for immediate client-side execution."
+        ]}
+        features={[
+          { title: "AI JSON Assistant", desc: "Instantly draft JSON stubs, get schema feedback, or clarify complex objects in plain human English using Google Gemini and OpenAI models." },
+          { title: "JSON Formatting & Minification", desc: "Format messy nested structures with custom tab spacing, or compress JSON data to save up to 75% tokens when building AI prompts." },
+          { title: "Syntax Error Correction", desc: "Identify missing commas, unquoted keys, and nested brackets with real-time, line-by-line syntax highlighting and error guides." },
+          { title: "Cross-Format Conversions", desc: "Convert standard JSON payloads into XML structures, clean YAML lists, TOML configs, or CSV spreadsheets for quick analysis." }
+        ]}
+        faq={[
+          { q: "Is JSON AI completely free to use?", a: "Yes. All of our JSON formatting, validation, parsing, conversion, and exploration tools are completely free to use. There are no limits on payload size or conversion counts." },
+          { q: "Are my API keys and payloads secure?", a: "Absolutely. Everything runs 100% client-side inside your browser environment. Your keys, schemas, and values never leave your device." },
+          { q: "What is the JSON Prompt Builder?", a: "It is a specialized utility that rewrites verbose text-based prompts into highly structured JSON formats. This reduces token overhead significantly for systems like GPT-4 and Gemini." }
+        ]}
+      />
       </section>
     </div>
   );
