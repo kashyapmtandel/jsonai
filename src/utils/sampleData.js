@@ -9,7 +9,7 @@ export const sampleJson = `{
     "Diff & Compare",
     "Path Finder",
     "Schema Generator",
-    "Tree Editor",
+    "Tree Viewer",
     "AI Assistant",
     "Escape & Unescape"
   ],

@@ -9,16 +9,24 @@ import { lintGutter } from '@codemirror/lint';
 import { useThemeObserver } from '../hooks/useThemeObserver';
 import './CodeEditor.css';
 
-const CodeEditor = ({ value, onChange, readOnly = false, placeholder = 'Paste your JSON here...', height = '400px', language = 'json' }) => {
+const CodeEditor = ({
+  value,
+  onChange,
+  readOnly = false,
+  placeholder = 'Paste your JSON here...',
+  height = '400px',
+  language = 'json',
+  onPaste,
+}) => {
   const editorRef = useRef(null);
   const viewRef = useRef(null);
   const onChangeRef = useRef(onChange);
+  const onPasteRef = useRef(onPaste);
   const themeCompartment = useRef(new Compartment());
   const globalTheme = useThemeObserver();
 
-  useEffect(() => {
-    onChangeRef.current = onChange;
-  }, [onChange]);
+  useEffect(() => { onChangeRef.current = onChange; }, [onChange]);
+  useEffect(() => { onPasteRef.current = onPaste; }, [onPaste]);
 
   useEffect(() => {
     if (!editorRef.current) return;
@@ -27,6 +35,17 @@ const CodeEditor = ({ value, onChange, readOnly = false, placeholder = 'Paste yo
       if (update.docChanged && onChangeRef.current) {
         onChangeRef.current(update.state.doc.toString());
       }
+    });
+
+    // Paste interception — fires before CodeMirror processes the paste
+    const pasteHandler = EditorView.domEventHandlers({
+      paste(event) {
+        const text = event.clipboardData?.getData('text/plain');
+        if (text && onPasteRef.current) {
+          onPasteRef.current(text);
+        }
+        // Don't return true — let CodeMirror handle the actual paste insertion
+      },
     });
 
     const extensions = [
@@ -41,6 +60,7 @@ const CodeEditor = ({ value, onChange, readOnly = false, placeholder = 'Paste yo
       json(),
       themeCompartment.current.of(globalTheme === 'dark' ? oneDark : []),
       updateListener,
+      pasteHandler,
       EditorView.theme({
         '&': { height, fontSize: '14px', fontFamily: 'var(--font-mono)' },
         '.cm-content': { fontFamily: 'var(--font-mono)', padding: '8px 0' },
@@ -66,12 +86,10 @@ const CodeEditor = ({ value, onChange, readOnly = false, placeholder = 'Paste yo
 
     viewRef.current = view;
 
-    return () => {
-      view.destroy();
-    };
+    return () => { view.destroy(); };
   }, []); // eslint-disable-line
 
-  // Update theme dynamically when it changes
+  // Update theme dynamically
   useEffect(() => {
     const view = viewRef.current;
     if (view) {
@@ -81,7 +99,7 @@ const CodeEditor = ({ value, onChange, readOnly = false, placeholder = 'Paste yo
     }
   }, [globalTheme]);
 
-  // Update content when value prop changes externally
+  // Sync value prop → editor content
   useEffect(() => {
     const view = viewRef.current;
     if (view && value !== undefined) {

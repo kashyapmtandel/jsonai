@@ -1,50 +1,148 @@
-.diff-panels {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+/* ─── Error banner ───────────────────────────────────────────────────────── */
+.error-banner {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: var(--error);
+  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  margin-bottom: 1rem;
+  animation: slideUp 0.3s ease;
 }
 
-.diff-stats {
+/* ─── Summary stats bar ──────────────────────────────────────────────────── */
+.diff-summary-bar {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  margin-bottom: 0.875rem;
+  font-size: 0.8rem;
   flex-wrap: wrap;
 }
 
-.stat {
-  padding: 0.35rem 0.85rem;
+.diff-summary-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.diff-identical {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--success);
+  font-weight: 600;
+}
+
+.diff-stat {
+  padding: 0.2rem 0.65rem;
   border-radius: var(--radius-sm);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 600;
   font-family: var(--font-mono);
 }
 
-.stat-added {
-  background: rgba(34, 197, 94, 0.1);
-  color: var(--success);
-  border: 1px solid rgba(34, 197, 94, 0.25);
+.diff-stat--added   { background: rgba(34, 197, 94, 0.1);  color: var(--success); border: 1px solid rgba(34, 197, 94, 0.25); }
+.diff-stat--removed { background: rgba(239, 68, 68, 0.1);  color: var(--error);   border: 1px solid rgba(239, 68, 68, 0.25); }
+.diff-stat--changed { background: rgba(245, 158, 11, 0.1); color: #f59e0b;        border: 1px solid rgba(245, 158, 11, 0.25); }
+
+.diff-total {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
 }
 
-.stat-removed {
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--error);
-  border: 1px solid rgba(239, 68, 68, 0.25);
+/* ─── Panels ─────────────────────────────────────────────────────────────── */
+.diff-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
-.stat-changed {
-  background: rgba(245, 158, 11, 0.1);
-  color: var(--warning);
-  border: 1px solid rgba(245, 158, 11, 0.25);
+.panel { display: flex; flex-direction: column; }
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
 }
 
-.stat-identical {
-  background: rgba(34, 197, 94, 0.1);
-  color: var(--success);
-  border: 1px solid rgba(34, 197, 94, 0.25);
+/* Status pills in panel header */
+.diff-panel-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
+
+.diff-status-idle,
+.diff-status-valid,
+.diff-status-invalid {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.diff-status-idle    { color: var(--text-muted); background: var(--bg-elevated); border: 1px solid var(--border-color); }
+.diff-status-valid   { color: var(--success);    background: rgba(34, 197, 94, 0.1);  border: 1px solid rgba(34, 197, 94, 0.25); }
+.diff-status-invalid { color: var(--error);      background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.25); }
+
+/* ─── Diff result section ────────────────────────────────────────────────── */
+.diff-result-wrap {
+  margin-top: 0.5rem;
+}
+
+.diff-result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.diff-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.diff-legend-item {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.diff-legend--added   { background: rgba(34, 197, 94, 0.12);  color: var(--success); }
+.diff-legend--removed { background: rgba(239, 68, 68, 0.12);  color: var(--error); }
+.diff-legend--changed { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
 
 .diff-result {
-  margin-top: 0.5rem;
   padding: 1.25rem;
   border-radius: var(--radius-md);
   background: var(--bg-secondary);
@@ -55,50 +153,38 @@
   line-height: 1.6;
 }
 
-/* jsondiffpatch styles override for dark theme */
-.diff-result .jsondiffpatch-delta {
-  font-family: var(--font-mono);
+/* Empty state */
+.diff-empty-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 2.5rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-muted);
   font-size: 0.85rem;
-}
-
-.diff-result .jsondiffpatch-added .jsondiffpatch-property-name,
-.diff-result .jsondiffpatch-added .jsondiffpatch-value pre {
-  background: rgba(34, 197, 94, 0.15);
-  color: var(--success);
-}
-
-.diff-result .jsondiffpatch-deleted .jsondiffpatch-property-name,
-.diff-result .jsondiffpatch-deleted .jsondiffpatch-value pre {
-  background: rgba(239, 68, 68, 0.15);
-  color: var(--error);
-  text-decoration: line-through;
-}
-
-.diff-result .jsondiffpatch-modified .jsondiffpatch-value pre {
-  background: rgba(245, 158, 11, 0.15);
-  color: var(--warning);
-}
-
-.diff-result .jsondiffpatch-unchanged {
-  color: var(--text-secondary);
-}
-
-.diff-result pre {
-  margin: 0;
-  padding: 0.15rem 0.4rem;
-  border-radius: 3px;
-  display: inline;
-}
-
-.diff-identical {
   text-align: center;
-  color: var(--success);
-  font-size: 1rem;
-  padding: 2rem;
+  margin-top: 0.5rem;
 }
 
+.diff-empty-result svg { opacity: 0.3; }
+.diff-empty-result p { margin: 0; }
+
+/* jsondiffpatch overrides */
+.diff-result .jsondiffpatch-delta { font-family: var(--font-mono); font-size: 0.85rem; }
+.diff-result .jsondiffpatch-added .jsondiffpatch-property-name,
+.diff-result .jsondiffpatch-added .jsondiffpatch-value pre { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+.diff-result .jsondiffpatch-deleted .jsondiffpatch-property-name,
+.diff-result .jsondiffpatch-deleted .jsondiffpatch-value pre { background: rgba(239, 68, 68, 0.15); color: var(--error); text-decoration: line-through; }
+.diff-result .jsondiffpatch-modified .jsondiffpatch-value pre { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+.diff-result .jsondiffpatch-unchanged { color: var(--text-secondary); }
+.diff-result pre { margin: 0; padding: 0.15rem 0.4rem; border-radius: 3px; display: inline; }
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .diff-panels {
-    grid-template-columns: 1fr;
-  }
+  .diff-panels { grid-template-columns: 1fr; }
+  .diff-summary-bar { flex-direction: column; align-items: flex-start; }
 }

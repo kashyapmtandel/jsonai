@@ -2,24 +2,24 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://generativelanguage.googleapis.com https://api.openai.com; frame-ancestors 'none'; upgrade-insecure-requests;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://generativelanguage.googleapis.com https://api.openai.com; upgrade-insecure-requests;" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="X-Frame-Options" content="DENY" />
+
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="JSON AI - The ultimate online JSON toolkit. Format, validate, convert, diff, and explore JSON with AI-powered features. Free, fast, and privacy-first." />
-  <meta name="keywords" content="JSON, formatter, validator, converter, diff, schema, editor, tools, online" />
+  <meta name="keywords" content="JSON, formatter, validator, converter, diff, schema, beautifier, tools, online" />
   <meta name="robots" content="index, follow" />
   <meta name="language" content="English" />
-  <title>JSON AI - The Ultimate Online JSON Toolkit</title>
+  <title>JSON AI - Free Online JSON Formatter, Validator & Beautifier</title>
   <link rel="canonical" href="https://jsonai.online/" />
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://jsonai.online/" />
   <meta property="og:site_name" content="JSON AI" />
-  <meta property="og:title" content="JSON AI - The Ultimate Online JSON Toolkit" />
+  <meta property="og:title" content="JSON AI - Free Online JSON Formatter, Validator & Beautifier" />
   <meta property="og:description" content="Format, validate, convert, diff, and explore JSON with AI-powered features. Free, fast, and privacy-first." />
   <meta property="og:image" content="https://jsonai.online/og-image.svg" />
   <meta property="og:image:width" content="1200" />
@@ -30,7 +30,7 @@
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:site" content="@jsonaitools" />
   <meta property="twitter:url" content="https://jsonai.online/" />
-  <meta property="twitter:title" content="JSON AI - The Ultimate Online JSON Toolkit" />
+  <meta property="twitter:title" content="JSON AI - Free Online JSON Formatter, Validator & Beautifier" />
   <meta property="twitter:description" content="Format, validate, convert, diff, and explore JSON with AI-powered features. Free, fast, and privacy-first." />
   <meta property="twitter:image" content="https://jsonai.online/og-image.svg" />
   
@@ -44,9 +44,9 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "JSON AI",
-  "alternateName": "JSON Tools",
+  "alternateName": "Online JSON Formatter",
   "url": "https://jsonai.online/",
-  "description": "A suite of free, client-side JSON tools including a formatter, validator, converter, diff checker, schema generator, and AI-powered JSON assistant.",
+  "description": "A suite of free, client-side JSON tools including a formatter, validator, viewer, beautifier, schema generator, and AI-powered JSON assistant.",
   "applicationCategory": "DeveloperApplication",
   "applicationSubCategory": "JSON developer tools",
   "operatingSystem": "Any",
@@ -74,7 +74,7 @@
   },
   "featureList": [
     "JSON Formatter and Beautifier",
-    "JSON Validator and Fixer",
+    "JSON Validator and Viewer",
     "JSON Converter for CSV, XML, YAML, and TOML",
     "JSON Diff and Compare",
     "JSON Schema Generator",
@@ -129,31 +129,95 @@
 </head>
 <body>
   <div id="root">
-    <section class="app-shell-fallback" aria-labelledby="fallback-tools-heading">
-      <div class="app-shell-fallback__content">
-        <h1 id="fallback-tools-heading" class="app-shell-fallback__title">JSON AI</h1>
-        <p class="app-shell-fallback__text">Loading JSON tools...</p>
-      </div>
-    </section>
-    <nav class="fallback-seo-links" aria-label="JSON AI tools">
-      <a href="/">Home</a>
-      <a href="/ai-assistant/">AI Assistant</a>
-      <a href="/prompt-builder/">JSON Prompt Builder</a>
-      <a href="/type-generator/">Type Generator</a>
-      <a href="/schema/">Schema Generator</a>
-      <a href="/minifier/">JSON Minifier</a>
-      <a href="/formatter/">JSON Formatter</a>
-      <a href="/validator/">JSON Validator</a>
-      <a href="/converter/">JSON Converter</a>
-      <a href="/diff/">JSON Diff</a>
-      <a href="/path-finder/">Path Finder</a>
-      <a href="/editor/">Tree Editor</a>
-      <a href="/escape/">JSON Escape Tool</a>
-      <a href="/about/">About</a>
-      <a href="/contact/">Contact</a>
-      <a href="/privacy/">Privacy Policy</a>
-      <a href="/terms/">Terms of Service</a>
-    </nav>
+    <header class="app-shell-fallback" style="text-align:center;padding:2rem 1rem 1rem">
+      <h1 id="fallback-tools-heading" class="app-shell-fallback__title">JSON AI — Free Online JSON Formatter, Validator &amp; Beautifier</h1>
+      <p class="app-shell-fallback__text">Your all-in-one suite of secure, client-side, and AI-powered JSON utilities. Format, validate, convert, compare, minify, and explore JSON instantly — 100% in your browser, no data ever leaves your device.</p>
+    </header>
+
+    <main style="max-width:860px;margin:0 auto;padding:1.5rem 1rem 3rem;font-family:Inter,sans-serif;color:#c0c8dc;line-height:1.7">
+      <section>
+        <h2 style="color:#eef2ff">Free JSON Tools — No Sign-up Required</h2>
+        <p>JSON AI provides a complete set of developer tools that run entirely in your browser. Whether you need to quickly format a messy API response, validate JSON syntax before deployment, convert JSON to CSV for a spreadsheet, or generate TypeScript types from a JSON payload, JSON AI has you covered — for free, forever.</p>
+        <p>All processing happens client-side. Your API keys, database schemas, configuration files, and sensitive payloads are never uploaded to any server. Privacy is a core feature, not an afterthought.</p>
+      </section>
+
+      <section>
+        <h2 style="color:#eef2ff">JSON Formatter &amp; Beautifier</h2>
+        <p>Paste raw or minified JSON and instantly transform it into clean, human-readable output with customisable indentation (2 spaces, 4 spaces, or tabs). The JSON Formatter highlights syntax errors in real time and shows exactly which line contains the problem, making debugging fast and painless for developers working with REST APIs, GraphQL responses, and configuration files.</p>
+        <a href="/formatter/" style="color:#818cf8">Open JSON Formatter →</a>
+      </section>
+
+      <section style="margin-top:1.5rem">
+        <h2 style="color:#eef2ff">JSON Validator</h2>
+        <p>Validate any JSON document with detailed, line-level error messages. Catch missing commas, unquoted keys, trailing commas, mismatched brackets, and other common JSON syntax mistakes instantly. Ideal for QA engineers, backend developers, and data analysts who work with large or complex JSON payloads regularly.</p>
+        <a href="/validator/" style="color:#818cf8">Open JSON Validator →</a>
+      </section>
+
+      <section style="margin-top:1.5rem">
+        <h2 style="color:#eef2ff">JSON Tree Viewer</h2>
+        <p>Visualize JSON as an interactive, collapsible tree structure. Click any node to expand or collapse it, making it easy to navigate deeply nested objects and arrays. The tree viewer uses color-coded tokens — red for keys, green for strings, blue for numbers, and purple for booleans and null — so you can understand your data structure at a glance. A stats bar shows the total count of objects, arrays, and primitive values.</p>
+        <a href="/editor/" style="color:#818cf8">Open JSON Tree Viewer →</a>
+      </section>
+
+      <section style="margin-top:1.5rem">
+        <h2 style="color:#eef2ff">AI JSON Assistant</h2>
+        <p>Generate, explain, and transform JSON using Google Gemini and OpenAI models. Describe the data structure you need in plain English — like "a list of 10 users with names, emails, and roles" — and the AI will produce perfectly formatted JSON in seconds. You can also paste existing JSON and ask the assistant to explain its structure, suggest improvements, or generate a matching JSON Schema.</p>
+        <a href="/ai-assistant/" style="color:#818cf8">Open AI Assistant →</a>
+      </section>
+
+      <section style="margin-top:1.5rem">
+        <h2 style="color:#eef2ff">JSON Converter — CSV, YAML, XML, TOML</h2>
+        <p>Convert JSON to and from CSV, YAML, XML, and TOML with a single click. Useful for data engineers who need to move data between systems, configuration managers switching between formats, and anyone who receives data in one format but needs it in another. The converter handles nested objects and arrays correctly, producing clean output every time.</p>
+        <a href="/converter/" style="color:#818cf8">Open JSON Converter →</a>
+      </section>
+
+      <section style="margin-top:1.5rem">
+        <h2 style="color:#eef2ff">JSON Schema Generator &amp; Validator</h2>
+        <p>Automatically generate a valid JSON Schema (Draft-07) from any JSON document. Use the generated schema to validate other JSON payloads against the same structure. Perfect for building APIs, documenting data contracts, or setting up CI/CD validation pipelines. Supports required fields, type inference, nested objects, and array item schemas.</p>
+        <a href="/schema/" style="color:#818cf8">Open Schema Generator →</a>
+      </section>
+
+      <section style="margin-top:1.5rem">
+        <h2 style="color:#eef2ff">Type Generator — TypeScript, Zod, Python, Go, Rust</h2>
+        <p>Convert JSON into production-ready type definitions for TypeScript interfaces, Zod schemas, Python dataclasses, Go structs, Rust structs, and PHP classes. Saves hours of manual type writing, especially for teams consuming complex third-party APIs. Simply paste your JSON sample and select the target language.</p>
+        <a href="/type-generator/" style="color:#818cf8">Open Type Generator →</a>
+      </section>
+
+      <section style="margin-top:1.5rem">
+        <h2 style="color:#eef2ff">JSON Diff — Compare Two JSON Documents</h2>
+        <p>Paste two JSON documents side by side and instantly see what changed. Added keys are highlighted in green, removed keys in red, and modified values in amber. The semantic diff understands JSON structure, so reordered keys in objects are not flagged as differences — only actual value changes are highlighted.</p>
+        <a href="/diff/" style="color:#818cf8">Open JSON Diff →</a>
+      </section>
+
+      <section style="margin-top:1.5rem">
+        <h2 style="color:#eef2ff">JSON Minifier — Save LLM API Tokens</h2>
+        <p>Strip all whitespace and formatting from JSON to produce the smallest possible payload. Minified JSON can reduce LLM token counts by up to 75%, significantly cutting costs when passing large JSON structures as context to GPT-4, Claude, or Gemini API calls. Also useful for reducing payload size in network requests and embedded configurations.</p>
+        <a href="/minifier/" style="color:#818cf8">Open JSON Minifier →</a>
+      </section>
+
+      <nav aria-label="All JSON AI tools" style="margin-top:2rem">
+        <h2 style="color:#eef2ff">All Tools</h2>
+        <ul style="columns:2;gap:1rem;padding-left:1.25rem">
+          <li><a href="/" style="color:#818cf8">JSON AI Home</a></li>
+          <li><a href="/ai-assistant/" style="color:#818cf8">AI Assistant</a></li>
+          <li><a href="/formatter/" style="color:#818cf8">JSON Formatter</a></li>
+          <li><a href="/validator/" style="color:#818cf8">JSON Validator</a></li>
+          <li><a href="/editor/" style="color:#818cf8">JSON Tree Viewer</a></li>
+          <li><a href="/prompt-builder/" style="color:#818cf8">JSON Prompt Builder</a></li>
+          <li><a href="/type-generator/" style="color:#818cf8">Type Generator</a></li>
+          <li><a href="/schema/" style="color:#818cf8">Schema Generator</a></li>
+          <li><a href="/minifier/" style="color:#818cf8">JSON Minifier</a></li>
+          <li><a href="/converter/" style="color:#818cf8">JSON Converter</a></li>
+          <li><a href="/diff/" style="color:#818cf8">JSON Diff</a></li>
+          <li><a href="/path-finder/" style="color:#818cf8">Path Finder</a></li>
+          <li><a href="/escape/" style="color:#818cf8">JSON Escape Tool</a></li>
+          <li><a href="/about/" style="color:#818cf8">About</a></li>
+          <li><a href="/contact/" style="color:#818cf8">Contact</a></li>
+          <li><a href="/privacy/" style="color:#818cf8">Privacy Policy</a></li>
+          <li><a href="/terms/" style="color:#818cf8">Terms of Service</a></li>
+        </ul>
+      </nav>
+    </main>
   </div>
   <script type="module" src="/src/main.jsx"></script>
 </body>

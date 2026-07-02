@@ -1,264 +1,391 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useMemo, useEffect } from 'react';
 import ToolLayout from '../components/ToolLayout';
 import CodeEditor from '../components/CodeEditor';
 import CopyButton from '../components/CopyButton';
 import ActionBar from '../components/ActionBar';
 import SeoContent from '../components/SeoContent';
-import { TreePine, FileText, Trash2, Download, ChevronRight, ChevronDown, Plus, X, ChevronsUpDown } from 'lucide-react';
+import {
+  TreePine, FileText, Trash2, ChevronRight, ChevronDown,
+  ChevronsDown, ChevronsUp, BarChart2, Upload, Search, X,
+  Copy, CheckCircle, XCircle,
+} from 'lucide-react';
 import { sampleJson } from '../utils/sampleData';
 import './TreeEditor.css';
 
-const TypeBadge = ({ type }) => {
-  const colors = {
-    object: '#6366f1', array: '#06b6d4', string: '#22c55e',
-    number: '#f59e0b', boolean: '#f97316', null: '#64748b',
+// ─── JSON path builder ────────────────────────────────────────────────────────
+const buildPath = (ancestors) =>
+  '$' + ancestors.map(a => (typeof a === 'number' ? `[${a}]` : `.${a}`)).join('');
+
+// ─── Stats ────────────────────────────────────────────────────────────────────
+const computeStats = (data) => {
+  let objects = 0, arrays = 0, primitives = 0, depth = 0;
+  const walk = (v, d = 0) => {
+    if (d > depth) depth = d;
+    if (v === null || typeof v !== 'object') { primitives++; return; }
+    if (Array.isArray(v)) { arrays++; v.forEach(c => walk(c, d + 1)); }
+    else { objects++; Object.values(v).forEach(c => walk(c, d + 1)); }
   };
-  const labels = { object: 'obj', array: 'arr', string: 'str', number: 'num', boolean: 'bool', null: 'null' };
-  return <span className="te-type-badge" style={{ background: `${colors[type]}22`, color: colors[type] }}>{labels[type]}</span>;
+  walk(data);
+  return { objects, arrays, primitives, depth };
 };
 
-const EditableTreeNode = ({ name, value, path, onUpdate, onDelete, depth = 0 }) => {
-  const [expanded, setExpanded] = useState(depth < 3);
-  const [editing, setEditing] = useState(null); // 'key' | 'value' | null
-  const [editValue, setEditValue] = useState('');
+// ─── Check if node matches search ────────────────────────────────────────────
+const nodeMatchesSearch = (name, value, query) => {
+  if (!query) return false;
+  const q = query.toLowerCase();
+  if (String(name).toLowerCase().includes(q)) return true;
+  if (typeof value === 'string' && value.toLowerCase().includes(q)) return true;
+  if (typeof value === 'number' && String(value).includes(q)) return true;
+  return false;
+};
 
+// ─── Tree Node ────────────────────────────────────────────────────────────────
+const TreeNode = ({ name, value, depth = 0, forceExpand, searchQuery, ancestors = [], onCopyPath }) => {
   const type = value === null ? 'null' : Array.isArray(value) ? 'array' : typeof value;
   const isExpandable = type === 'object' || type === 'array';
-  const children = isExpandable ? (type === 'array' ? value.map((v, i) => [i, v]) : Object.entries(value)) : [];
+  const [expanded, setExpanded] = useState(depth < 2);
+  const [copied, setCopied] = useState(false);
 
-  const startEditValue = () => {
-    if (isExpandable) return;
-    setEditing('value');
-    setEditValue(type === 'string' ? value : JSON.stringify(value));
+  const isOpen = forceExpand !== undefined ? forceExpand : expanded;
+  const currentPath = buildPath([...ancestors, ...(name !== undefined ? [name] : [])]);
+
+  const childEntries = isExpandable
+    ? (type === 'array' ? value.map((v, i) => [i, v]) : Object.entries(value))
+    : [];
+  const isEmpty = childEntries.length === 0;
+
+  const isHighlighted = searchQuery && nodeMatchesSearch(name, value, searchQuery);
+
+  const handleToggle = () => {
+    if (forceExpand === undefined) setExpanded(e => !e);
   };
 
-  const commitEdit = () => {
-    if (editing === 'value') {
-      let newVal;
-      const trimmed = editValue.trim();
-      if (trimmed === 'null') newVal = null;
-      else if (trimmed === 'true') newVal = true;
-      else if (trimmed === 'false') newVal = false;
-      else if (!isNaN(Number(trimmed)) && trimmed !== '') newVal = Number(trimmed);
-      else newVal = editValue;
-      onUpdate(path, newVal);
-    }
-    setEditing(null);
+  const handleCopyValue = (e) => {
+    e.stopPropagation();
+    const text = typeof value === 'string' ? value : JSON.stringify(value, null, 2);
+    navigator.clipboard?.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
   };
 
-  const handleChildUpdate = (childPath, newVal) => onUpdate(childPath, newVal);
+  const showExpanded = forceExpand !== undefined ? forceExpand : expanded;
 
-  const handleChildDelete = (childPath) => onDelete(childPath);
-
-  const addChild = () => {
-    if (type === 'array') {
-      const newArr = [...value, ''];
-      onUpdate(path, newArr);
-    } else if (type === 'object') {
-      const key = `newKey${Object.keys(value).length}`;
-      onUpdate(path, { ...value, [key]: '' });
-    }
+  const renderSummary = () => {
+    if (type === 'array') return <span className="tv-summary">({value.length} items)</span>;
+    if (type === 'object') return <span className="tv-summary">({Object.keys(value).length} keys)</span>;
+    return null;
   };
 
   const renderValue = () => {
-    if (editing === 'value') {
-      return (
-        <input
-          className="te-edit-input"
-          value={editValue}
-          onChange={(e) => setEditValue(e.target.value)}
-          onBlur={commitEdit}
-          onKeyDown={(e) => e.key === 'Enter' && commitEdit()}
-          autoFocus
-        />
-      );
-    }
-    if (type === 'string') return <span className="te-val te-val-str" onDoubleClick={startEditValue}>"{value}"</span>;
-    if (type === 'number') return <span className="te-val te-val-num" onDoubleClick={startEditValue}>{value}</span>;
-    if (type === 'boolean') return <span className="te-val te-val-bool" onDoubleClick={startEditValue}>{String(value)}</span>;
-    if (type === 'null') return <span className="te-val te-val-null" onDoubleClick={startEditValue}>null</span>;
-    if (type === 'array') return <span className="te-count">[{value.length} items]</span>;
-    if (type === 'object') return <span className="te-count">{'{' + Object.keys(value).length + ' keys}'}</span>;
+    if (type === 'string') return <span className="tv-val tv-str">"{value}"</span>;
+    if (type === 'number') return <span className="tv-val tv-num">{value}</span>;
+    if (type === 'boolean') return <span className="tv-val tv-bool">{String(value)}</span>;
+    if (type === 'null') return <span className="tv-val tv-null">null</span>;
     return null;
   };
 
   return (
-    <div className="te-node">
-      <div className="te-row">
-        <span style={{ width: depth * 20 + 'px', flexShrink: 0 }} />
-        {isExpandable ? (
-          <button className="te-toggle" onClick={() => setExpanded(!expanded)}>
-            {expanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-          </button>
-        ) : <span className="te-toggle-ph" />}
+    <div className={`tv-node${isHighlighted ? ' tv-node--match' : ''}`}>
+      <div
+        className={`tv-row ${isExpandable && !isEmpty ? 'tv-clickable' : ''}`}
+        style={{ paddingLeft: depth * 18 + 'px' }}
+        onClick={isExpandable && !isEmpty ? handleToggle : undefined}
+        title={currentPath}
+      >
+        {/* Toggle icon */}
+        <span className="tv-toggle-icon">
+          {isExpandable && !isEmpty
+            ? (showExpanded ? <ChevronDown size={13} /> : <ChevronRight size={13} />)
+            : <span className="tv-toggle-ph" />}
+        </span>
+
+        {/* Key */}
         {name !== undefined && (
-          <span className="te-key">{typeof name === 'number' ? `[${name}]` : name}</span>
+          <>
+            <span className="tv-key">{typeof name === 'number' ? `[${name}]` : `"${name}"`}</span>
+            <span className="tv-colon">: </span>
+          </>
         )}
-        {name !== undefined && <span className="te-colon">:</span>}
-        {renderValue()}
-        <TypeBadge type={type} />
-        <div className="te-actions">
-          {isExpandable && (
-            <button className="te-action-btn" onClick={addChild} title="Add child">
-              <Plus size={12} />
-            </button>
-          )}
-          {path.length > 0 && (
-            <button className="te-action-btn te-delete-btn" onClick={() => onDelete(path)} title="Delete">
-              <X size={12} />
-            </button>
-          )}
-        </div>
+
+        {/* Value or bracket + summary */}
+        {isExpandable ? (
+          <>
+            <span className="tv-bracket">{type === 'array' ? '[' : '{'}</span>
+            {!showExpanded && !isEmpty && renderSummary()}
+            {isEmpty && <span className="tv-bracket">{type === 'array' ? ']' : '}'}</span>}
+          </>
+        ) : renderValue()}
+
+        {/* Copy button (shows on hover via CSS) */}
+        <button
+          className={`tv-copy-btn${copied ? ' tv-copy-btn--done' : ''}`}
+          onClick={handleCopyValue}
+          title={`Copy value — path: ${currentPath}`}
+        >
+          {copied ? <CheckCircle size={11} /> : <Copy size={11} />}
+        </button>
       </div>
-      {isExpandable && expanded && (
-        <div className="te-children">
-          {children.map(([key, val]) => {
-            const childPath = [...path, key];
-            return (
-              <EditableTreeNode
-                key={childPath.join('.')}
-                name={key}
-                value={val}
-                path={childPath}
-                onUpdate={handleChildUpdate}
-                onDelete={handleChildDelete}
-                depth={depth + 1}
-              />
-            );
-          })}
+
+      {/* Children */}
+      {isExpandable && !isEmpty && showExpanded && (
+        <div className="tv-children">
+          {childEntries.map(([k, v]) => (
+            <TreeNode
+              key={k}
+              name={k}
+              value={v}
+              depth={depth + 1}
+              forceExpand={forceExpand}
+              searchQuery={searchQuery}
+              ancestors={[...ancestors, ...(name !== undefined ? [name] : [])]}
+              onCopyPath={onCopyPath}
+            />
+          ))}
+          <div className="tv-row" style={{ paddingLeft: depth * 18 + 'px' }}>
+            <span className="tv-toggle-ph" />
+            <span className="tv-bracket">{type === 'array' ? ']' : '}'}</span>
+          </div>
         </div>
+      )}
+
+      {/* Collapsed summary bracket */}
+      {isExpandable && !isEmpty && !showExpanded && (
+        <span className="tv-bracket-inline">{type === 'array' ? ']' : '}'}</span>
       )}
     </div>
   );
 };
 
+// ─── Main Component ───────────────────────────────────────────────────────────
 const TreeEditor = () => {
-  const [jsonData, setJsonData] = useState(null);
   const [codeValue, setCodeValue] = useState('');
+  const [jsonData, setJsonData] = useState(null);
   const [error, setError] = useState('');
+  const [forceExpand, setForceExpand] = useState(undefined);
+  const [searchQuery, setSearchQuery] = useState('');
+  const fileInputRef = useRef(null);
+  const debounceRef = useRef(null);
 
-  const syncFromCode = useCallback((text) => {
-    setCodeValue(text);
-    if (!text.trim()) {
-      setJsonData(null);
-      setError('');
-      return;
-    }
-    try {
-      setJsonData(JSON.parse(text));
-      setError('');
-    } catch (e) {
-      setError(e.message);
-    }
+  // Live validation status (driven by codeValue)
+  const liveStatus = useMemo(() => {
+    const t = codeValue.trim();
+    if (!t) return null;
+    try { JSON.parse(t); return { valid: true }; }
+    catch (e) { return { valid: false, message: e.message }; }
+  }, [codeValue]);
+
+  // Live input stats
+  const liveStats = useMemo(() => {
+    if (!codeValue) return null;
+    return {
+      lines: codeValue.split('\n').length,
+      chars: codeValue.length,
+      kb: (new Blob([codeValue]).size / 1024).toFixed(1),
+    };
+  }, [codeValue]);
+
+  // Auto-parse on input change (debounced 400ms)
+  useEffect(() => {
+    clearTimeout(debounceRef.current);
+    const t = codeValue.trim();
+    if (!t) { setJsonData(null); setError(''); return; }
+    debounceRef.current = setTimeout(() => {
+      try {
+        setJsonData(JSON.parse(t));
+        setError('');
+        setForceExpand(undefined);
+      } catch (e) {
+        setJsonData(null);
+        setError(e.message);
+      }
+    }, 400);
+    return () => clearTimeout(debounceRef.current);
+  }, [codeValue]);
+
+  const handleClear = useCallback(() => {
+    setCodeValue(''); setJsonData(null); setError('');
+    setForceExpand(undefined); setSearchQuery('');
   }, []);
 
-  const syncFromTree = useCallback((newData) => {
-    setJsonData(newData);
-    setCodeValue(JSON.stringify(newData, null, 2));
-    setError('');
+  const handleSample = useCallback(() => {
+    setCodeValue(sampleJson); setError(''); setSearchQuery('');
   }, []);
 
-  const handleUpdate = (path, newValue) => {
-    if (path.length === 0) {
-      syncFromTree(newValue);
-      return;
-    }
-    const clone = JSON.parse(JSON.stringify(jsonData));
-    let target = clone;
-    for (let i = 0; i < path.length - 1; i++) {
-      target = target[path[i]];
-    }
-    target[path[path.length - 1]] = newValue;
-    syncFromTree(clone);
-  };
+  const handleFileUpload = useCallback((e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => { setCodeValue(ev.target.result); setSearchQuery(''); };
+    reader.readAsText(file);
+    e.target.value = '';
+  }, []);
 
-  const handleDelete = (path) => {
-    if (path.length === 0) return;
-    const clone = JSON.parse(JSON.stringify(jsonData));
-    let target = clone;
-    for (let i = 0; i < path.length - 1; i++) {
-      target = target[path[i]];
-    }
-    const key = path[path.length - 1];
-    if (Array.isArray(target)) {
-      target.splice(key, 1);
-    } else {
-      delete target[key];
-    }
-    syncFromTree(clone);
-  };
-
-  const handleDownload = () => {
-    if (!codeValue) return;
-    const blob = new Blob([codeValue], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'edited.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+  const stats = jsonData !== null ? computeStats(jsonData) : null;
 
   return (
     <ToolLayout
-      title="Tree Editor"
-      description="Visual tree editor with inline editing, add/delete nodes, and code sync."
+      title="JSON Tree Viewer"
+      description="Visualize, search, and explore JSON as an interactive collapsible tree."
       icon={TreePine}
     >
+      {/* ── Toolbar ── */}
       <ActionBar>
-        <button className="btn btn-ghost" onClick={() => syncFromCode(sampleJson)}>
-          <FileText size={16} /> Sample
+        <button className="btn btn-ghost" onClick={handleSample}>
+          <FileText size={15} /> Sample
         </button>
-        <button className="btn btn-ghost" onClick={() => { setCodeValue(''); setJsonData(null); setError(''); }}>
-          <Trash2 size={16} /> Clear
+        <button className="btn btn-ghost" onClick={() => fileInputRef.current?.click()}>
+          <Upload size={15} /> Upload
         </button>
+        <input ref={fileInputRef} type="file" accept=".json,.txt,application/json"
+          style={{ display: 'none' }} onChange={handleFileUpload} />
         <CopyButton text={codeValue} />
-        <button className="btn btn-ghost" onClick={handleDownload} disabled={!codeValue}>
-          <Download size={16} /> Download
+        <button className="btn btn-ghost" onClick={handleClear}>
+          <Trash2 size={15} /> Clear
         </button>
       </ActionBar>
 
+      {/* ── Status bar ── */}
+      <div className="tv-status-bar">
+        <div className="tv-status-left">
+          {!codeValue.trim() && (
+            <span className="tv-status-idle">Paste JSON — tree renders automatically</span>
+          )}
+          {liveStatus?.valid === true && (
+            <span className="tv-status-valid"><CheckCircle size={13} /> Valid JSON</span>
+          )}
+          {liveStatus?.valid === false && (
+            <span className="tv-status-invalid"><XCircle size={13} /> {liveStatus.message}</span>
+          )}
+        </div>
+        {liveStats && (
+          <div className="tv-meta-stats">
+            <span>{liveStats.lines} lines</span>
+            <span className="tv-stats-sep">·</span>
+            <span>{liveStats.chars.toLocaleString()} chars</span>
+            <span className="tv-stats-sep">·</span>
+            <span>{liveStats.kb} KB</span>
+          </div>
+        )}
+      </div>
+
       {error && <div className="error-banner">{error}</div>}
 
-      <div className="te-layout">
+      <div className="tv-layout">
+        {/* ── Left: JSON Input ── */}
+        <div className="panel">
+          <div className="panel-header">JSON Input</div>
+          <CodeEditor
+            value={codeValue}
+            onChange={setCodeValue}
+            placeholder="Paste JSON here — tree updates automatically..."
+            height="490px"
+          />
+        </div>
+
+        {/* ── Right: Tree View ── */}
         <div className="panel">
           <div className="panel-header">
             <span>Tree View</span>
-            <span style={{ fontSize: '0.7rem', fontWeight: 400, color: 'var(--text-muted)' }}>Double-click values to edit</span>
-          </div>
-          <div className="te-tree-container">
-            {jsonData !== null ? (
-              <EditableTreeNode
-                value={jsonData}
-                path={[]}
-                onUpdate={handleUpdate}
-                onDelete={handleDelete}
-              />
-            ) : (
-              <div className="te-placeholder">Paste or load JSON to start editing</div>
+            {jsonData !== null && (
+              <div className="tv-controls">
+                <button className="btn btn-ghost btn-xs" onClick={() => setForceExpand(true)} title="Expand all">
+                  <ChevronsDown size={13} /> Expand
+                </button>
+                <button className="btn btn-ghost btn-xs" onClick={() => setForceExpand(false)} title="Collapse all">
+                  <ChevronsUp size={13} /> Collapse
+                </button>
+                <button className="btn btn-ghost btn-xs" onClick={() => setForceExpand(undefined)}>
+                  Reset
+                </button>
+              </div>
             )}
           </div>
-        </div>
-        <div className="panel">
-          <div className="panel-header">Code View</div>
-          <CodeEditor value={codeValue} onChange={syncFromCode} placeholder="Paste JSON here..." height="500px" />
+
+          {/* Search bar */}
+          {jsonData !== null && (
+            <div className="tv-search-wrap">
+              <Search size={13} className="tv-search-icon" />
+              <input
+                className="tv-search-input"
+                type="text"
+                placeholder="Search keys and values..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+              />
+              {searchQuery && (
+                <button className="tv-search-clear" onClick={() => setSearchQuery('')}>
+                  <X size={12} />
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* Stats bar */}
+          {stats && (
+            <div className="tv-stats">
+              <BarChart2 size={13} />
+              <span><strong>{stats.objects}</strong> objects</span>
+              <span className="tv-stats-sep">·</span>
+              <span><strong>{stats.arrays}</strong> arrays</span>
+              <span className="tv-stats-sep">·</span>
+              <span><strong>{stats.primitives}</strong> values</span>
+              <span className="tv-stats-sep">·</span>
+              <span>depth <strong>{stats.depth}</strong></span>
+            </div>
+          )}
+
+          {/* Tree container */}
+          <div className="te-tree-container">
+            {jsonData !== null ? (
+              <TreeNode
+                value={jsonData}
+                depth={0}
+                forceExpand={forceExpand}
+                searchQuery={searchQuery}
+                ancestors={[]}
+              />
+            ) : (
+              <div className="te-placeholder">
+                <TreePine size={32} strokeWidth={1.2} />
+                <p>Paste JSON in the left panel — <br />the tree renders automatically</p>
+              </div>
+            )}
+          </div>
+
+          {/* Color legend */}
+          {jsonData !== null && (
+            <div className="tv-legend">
+              <span className="tv-legend-item"><span className="tv-key tv-legend-swatch">"key"</span> Keys</span>
+              <span className="tv-legend-item"><span className="tv-val tv-str tv-legend-swatch">"str"</span> String</span>
+              <span className="tv-legend-item"><span className="tv-val tv-num tv-legend-swatch">42</span> Number</span>
+              <span className="tv-legend-item"><span className="tv-val tv-bool tv-legend-swatch">true</span> Boolean</span>
+              <span className="tv-legend-item"><span className="tv-val tv-null tv-legend-swatch">null</span> Null</span>
+            </div>
+          )}
         </div>
       </div>
 
-      <SeoContent 
-        title="Interactive JSON Tree Viewer & Editor"
+      <SeoContent
+        title="JSON Tree Viewer — Visualize & Search JSON Structure Online"
         description={[
-          "Sometimes raw code is just too hard to read. Our JSON Tree Viewer provides a clean, interactive, hierarchical view of your data.",
-          "Expand and collapse nested objects, visualize deep array structures, and edit key-value pairs directly without worrying about breaking syntax rules."
+          'The JSON Tree Viewer transforms raw JSON text into an interactive, collapsible tree. Paste JSON and the tree renders automatically — no button click required. Click any node to expand or collapse it.',
+          'Search across all keys and values, copy individual node values with one click, and see the full JSON path on hover. Supports file upload, Expand All / Collapse All, and a stats bar showing total objects, arrays, and values.',
         ]}
         features={[
-          { title: "Visual Hierarchy", desc: "Transforms massive blocks of code into an intuitive, collapsible folder-like structure that is easy to navigate." },
-          { title: "Safe Editing", desc: "Edit values directly in the UI. We ensure you can't accidentally delete a comma or quote and break your JSON payload." },
-          { title: "100% Client-Side", desc: "The tree visualization is rendered locally on your device, ensuring total privacy for sensitive data." }
+          { title: 'Auto-Render on Paste', desc: 'The tree updates automatically as you type or paste — no "View Tree" button needed.' },
+          { title: 'Search Keys & Values', desc: 'Filter and highlight matching nodes across the entire tree by typing in the search box.' },
+          { title: 'Copy Node Values', desc: 'Hover any node and click the copy icon to copy that node\'s value to clipboard instantly.' },
+          { title: 'JSON Path on Hover', desc: 'Hover any row to see its full JSONPath (e.g. $.author.name) in the tooltip.' },
+          { title: 'Stats Overview', desc: 'A stats bar shows total objects, arrays, primitive values, and nesting depth.' },
+          { title: 'File Upload', desc: 'Upload any .json file directly and the tree renders immediately.' },
         ]}
         faq={[
-          { q: "Can I use this instead of a code editor?", a: "Yes! For many non-technical users, navigating a JSON Tree is much easier than looking at raw brackets and braces. It's perfect for product managers and QA engineers." },
-          { q: "How do I export my changes?", a: "Once you have finished editing your JSON in the tree view, simply click the Download or Copy button to get the updated raw code." }
+          { q: 'Does the tree update automatically?', a: 'Yes — the tree re-renders automatically 400ms after you stop typing or pasting, with no button click required.' },
+          { q: 'Can I search for a specific key or value?', a: 'Yes — type in the search box above the tree to highlight all matching keys and values.' },
+          { q: 'How do I copy a node\'s value?', a: 'Hover any row in the tree and click the copy icon that appears on the right side. It copies the node\'s value to your clipboard.' },
+          { q: 'What does the JSON Path tooltip show?', a: 'When you hover a row, a tooltip shows the full JSONPath to that node, like $.users[0].email, which you can use with tools like jq or JSONPath expressions.' },
+          { q: 'Is there a size limit?', a: 'The tool runs in your browser. Very large JSON (several MB) may impact performance. For huge files consider command-line tools like jq.' },
         ]}
       />
     </ToolLayout>

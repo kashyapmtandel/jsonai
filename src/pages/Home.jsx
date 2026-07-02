@@ -38,12 +38,12 @@ const Home = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="hero-badge">✨ Free & Open Source</div>
+        <div className="hero-badge">✨ Free Online AI-powered Tools</div>
         <h1 className="hero-title">
-          Smart <span className="gradient-text">JSON AI</span>
+          Smart <span className="gradient-text">JSON Formatter</span>
         </h1>
         <p className="hero-subtitle">
-          Format, validate, and explore JSON data instantly. Supercharge your workflow 
+          Format, validate, and view JSON data instantly. Supercharge your workflow 
           with our secure, client-side AI Assistant.
         </p>
 
@@ -90,7 +90,7 @@ const Home = () => {
           )}
         </div>
 		<SeoContent
-        title="JSON AI — The Ultimate Online JSON Toolkit"
+        title="JSON AI - Free Online JSON Formatter, Validator & Beautifier"
         description={[
           "Welcome to JSON AI, your all-in-one suite of secure, client-side, and AI-powered JSON utilities. Our tools help web developers, data analysts, and engineering teams format, validate, convert, compare, minify, and query JSON payloads instantly and privately.",
           "Every tool in the JSON AI suite executes directly in your browser. We never upload or save your sensitive JSON configurations, database models, API keys, or custom payloads. It is 100% secure, private, and optimized for immediate client-side execution."

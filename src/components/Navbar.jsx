@@ -4,7 +4,7 @@ import { Braces, Sun, Moon, Menu, X, ChevronDown } from 'lucide-react';
 import tools from '../data/tools';
 import './Navbar.css';
 
-const primaryRoutes = ['/ai-assistant/', '/prompt-builder/', '/type-generator/', '/schema/'];
+const primaryRoutes = ['/ai-assistant/', '/formatter/', '/validator/', '/editor/'];
 const primaryNavItems = tools.filter((t) => primaryRoutes.includes(t.to));
 const moreNavItems = tools.filter((t) => !primaryRoutes.includes(t.to));
 
@@ -142,7 +142,7 @@ const Navbar = () => {
               aria-controls="navbar-tools-menu"
               aria-label="Open tools menu"
             >
-              Tools
+              More Tools
               <ChevronDown size={16} />
             </button>
             <ul

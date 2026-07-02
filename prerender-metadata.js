@@ -15,10 +15,10 @@ const siteUrl = 'https://jsonai.online';
 const routes = [
   {
     route: '/',
-    title: 'JSON AI — The Ultimate Online JSON Toolkit',
+    title: 'JSON AI - Free Online JSON Formatter, Validator & Editor',
     description: 'Format, validate, convert, diff, and explore JSON with AI-powered features. Free, fast, and privacy-first.',
     fallbackHtml: `
-      <h2>JSON AI — The Ultimate Online JSON Toolkit</h2>
+      <h2>JSON AI - Free Online JSON Formatter, Validator & Editor</h2>
       <p>Welcome to JSON AI, your all-in-one suite of secure, client-side, and AI-powered JSON utilities. Our tools help web developers, data analysts, and engineering teams format, validate, convert, compare, minify, and query JSON payloads instantly and privately.</p>
       <p>Every tool in the JSON AI suite executes directly in your browser. We never upload or save your sensitive JSON configurations, database models, API keys, or custom payloads. It is 100% secure, private, and optimized for immediate client-side execution.</p>
       <h3>Key Features</h3>
@@ -327,7 +327,7 @@ const createRouteFile = ({ route, title, description, fallbackHtml = '' }) => {
 
   // Inject Static Fallback Content inside the app shell
   if (fallbackHtml) {
-    const fallbackSearch = '<p class="app-shell-fallback__text">Loading JSON tools...</p>';
+    const fallbackSearch = '<p class="app-shell-fallback__text">Loading JSON AI - Free Online JSON Formatter, Validator & Editor...</p>';
     html = html.replace(
       fallbackSearch,
       `<p class="app-shell-fallback__text">Loading ${title}...</p>\n        <div class="static-fallback-seo-content" style="max-width: 800px; margin: 40px auto 0; text-align: left; opacity: 0.85; font-size: 0.95rem; line-height: 1.6;">${fallbackHtml}</div>`

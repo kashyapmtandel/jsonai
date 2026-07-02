@@ -12,6 +12,27 @@ const tools = [
     color: '#8b5cf6',
   },
   {
+    title: 'JSON Formatter',
+    description: 'Format, beautify, and minify JSON with customizable indentation.',
+    icon: Wand2,
+    to: '/formatter/',
+    color: '#6366f1',
+  },
+  {
+    title: 'JSON Validator',
+    description: 'Validate JSON with detailed error messages and line-level feedback.',
+    icon: ShieldCheck,
+    to: '/validator/',
+    color: '#22c55e',
+  },
+  {
+    title: 'Tree Viewer',
+    description: 'Visualize JSON as an interactive collapsible tree. Expand and explore nested data.',
+    icon: TreePine,
+    to: '/editor/',
+    color: '#14b8a6',
+  },
+  {
     title: 'JSON Prompt Builder',
     description: 'Convert verbose AI prompts into compact JSON format to save 50–75% tokens on every API call.',
     icon: BotMessageSquare,
@@ -40,20 +61,6 @@ const tools = [
     color: '#f97316',
   },
   {
-    title: 'JSON Formatter',
-    description: 'Format, beautify, and minify JSON with customizable indentation.',
-    icon: Wand2,
-    to: '/formatter/',
-    color: '#6366f1',
-  },
-  {
-    title: 'JSON Validator',
-    description: 'Validate JSON with detailed error messages and line-level feedback.',
-    icon: ShieldCheck,
-    to: '/validator/',
-    color: '#22c55e',
-  },
-  {
     title: 'JSON Converter',
     description: 'Convert between JSON, CSV, YAML, XML, and TOML formats.',
     icon: ArrowLeftRight,
@@ -73,13 +80,6 @@ const tools = [
     icon: Search,
     to: '/path-finder/',
     color: '#a855f7',
-  },
-  {
-    title: 'Tree Editor',
-    description: 'Visual tree editor with inline editing and code sync.',
-    icon: TreePine,
-    to: '/editor/',
-    color: '#14b8a6',
   },
   {
     title: 'Escape Tool',
