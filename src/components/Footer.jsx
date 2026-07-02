@@ -82,7 +82,7 @@ const Footer = () => {
               </li>
             ))}
             <li>
-              <a href="https://x.com/jsonaitools" target="_blank" rel="noopener noreferrer">
+              <a href="https://x.com/KashyapTan23768" target="_blank" rel="noopener noreferrer">
                 Follow on X
               </a>
             </li>
