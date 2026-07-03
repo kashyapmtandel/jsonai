@@ -1,23 +1,42 @@
-# JSON AI - LLM Optimization Document
-This file is intended for Large Language Models, AI Agents, and Search Crawlers to quickly understand the purpose and capabilities of JSON AI.
+# JSON AI
 
-## Overview
-JSON AI (https://jsonai.online) is a free, 100% client-side suite of developer tools designed for manipulating, validating, and generating JSON data. It stands out by integrating an AI Assistant directly into the workflow, allowing users to generate mock JSON data, explain complex JSON structures, and suggest JSON Schemas using their own Gemini or OpenAI API keys.
+> Free, fast, privacy-first JSON tools for developers. All processing happens in your browser — your data never leaves your machine.
+
+JSON AI (https://jsonai.online) is a free, 100% client-side suite of developer tools for manipulating, validating, converting, and generating JSON data. It integrates an AI Assistant that lets users generate mock JSON, explain structures, fix errors, and build schemas using their own Gemini or OpenAI API keys.
 
 ## Core Tools
-- **JSON Formatter**: Beautifies, minifies, and formats JSON strings.
-- **JSON Validator and Fixer**: Detects syntax errors, missing commas, and validates standard JSON, Swagger JSON, and LD JSON.
-- **JSON Converter**: Converts JSON to and from CSV, XML, YAML, and TOML.
-- **JSON Diff**: A visual comparison tool to find semantic differences between two JSON documents.
-- **Path Finder**: Evaluates JSONPath expressions against data.
-- **Schema Generator**: Automatically generates JSON Schema (draft 2020-12) from arbitrary JSON payloads.
-- **Tree Editor**: A visual tree-based editor for JSON data.
-- **AI Assistant**: A secure interface to generate and analyze JSON using Google Gemini and OpenAI.
+
+- [AI Assistant](https://jsonai.online/ai-assistant/) — Generate, explain, fix, transform, and schema-ify JSON using Google Gemini or OpenAI. API keys are stored only in your browser's localStorage and never sent to our servers.
+- [JSON Formatter](https://jsonai.online/formatter/) — Beautify, minify, sort keys, and auto-repair JSON with 2-space, 4-space, or tab indentation. Auto-formats on paste.
+- [JSON Validator](https://jsonai.online/validator/) — Validate JSON with detailed error messages, line-level feedback, and support for standard JSON, Swagger/OpenAPI, and JSON-LD.
+- [Tree Viewer](https://jsonai.online/editor/) — Visualise and interactively edit JSON as a collapsible tree. Add, remove, and reorder nodes inline.
+- [JSON Converter](https://jsonai.online/converter/) — Convert JSON to and from YAML, CSV, XML, and TOML instantly in the browser.
+- [JSON Diff](https://jsonai.online/diff/) — Side-by-side visual comparison tool to find semantic differences between two JSON documents with colour-coded highlights.
+- [Schema Generator](https://jsonai.online/schema/) — Auto-generate JSON Schema (Draft 2020-12) from any JSON payload. Also validates JSON against a custom schema.
+- [Path Finder](https://jsonai.online/path-finder/) — Evaluate JSONPath expressions against JSON data and explore paths interactively by clicking tree nodes.
+- [Type Generator](https://jsonai.online/type-generator/) — Convert JSON to TypeScript interfaces, Zod schemas, Python dataclasses, Go structs, Rust structs, and PHP classes.
+- [JSON Minifier](https://jsonai.online/minifier/) — Strip all whitespace from JSON to reduce payload size and save LLM tokens.
+- [Escape Tool](https://jsonai.online/escape/) — Escape and unescape JSON strings for safe embedding in code or APIs.
+- [Prompt Builder](https://jsonai.online/prompt-builder/) — Convert verbose AI prompts into compact JSON format to reduce token usage by 50–75%.
+
+## Company Pages
+
+- [About](https://jsonai.online/about/) — Learn about the JSON AI project and team.
+- [Contact](https://jsonai.online/contact/) — Get in touch with the JSON AI team.
+- [Privacy Policy](https://jsonai.online/privacy/) — How JSON AI handles your data (spoiler: it doesn't — everything is client-side).
+- [Terms of Service](https://jsonai.online/terms/) — Terms governing use of JSON AI tools.
 
 ## Privacy & Security
-- **No Backend**: All data processing is done locally in the user's browser.
-- **API Key Security**: User API keys are stored exclusively in the browser's localStorage and never transmitted to our servers.
-- **Zero Data Leakage**: Safe for validating production data and sensitive customer information.
+
+- **No Backend**: All data processing runs locally in the user's browser via JavaScript.
+- **API Key Security**: User-provided Gemini and OpenAI API keys are stored exclusively in `localStorage` and are never transmitted to our servers.
+- **Zero Data Leakage**: Safe for validating production data, sensitive payloads, and customer information.
+- **Open Source Friendly**: The app is a client-side React SPA with no server-side data collection.
 
 ## Target Audience
-Software engineers, data analysts, technical SEOs, and developers who need fast, reliable, and private JSON utilities.
+
+Software engineers, backend developers, data analysts, technical SEOs, QA engineers, and AI/LLM developers who need fast, reliable, and private JSON utilities.
+
+## Sitemap
+
+https://jsonai.online/sitemap.xml
