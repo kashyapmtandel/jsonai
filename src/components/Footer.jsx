@@ -3,21 +3,21 @@ import { Heart, Braces, Lock } from 'lucide-react';
 import './Footer.css';
 
 const CORE_TOOLS = [
-  { to: '/ai-assistant/',   label: 'AI Assistant' },
-  { to: '/formatter/',      label: 'JSON Formatter' },
-  { to: '/validator/',      label: 'JSON Validator' },
-  { to: '/editor/',         label: 'Tree Viewer' },
-  { to: '/diff/',           label: 'JSON Diff' },
-  { to: '/converter/',      label: 'JSON Converter' },
+  { to: '/json-ai-assistant/',   label: 'AI Assistant' },
+  { to: '/json-formatter/',      label: 'JSON Formatter' },
+  { to: '/json-validator/',      label: 'JSON Validator' },
+  { to: '/json-editor/',         label: 'Tree Viewer' },
+  { to: '/json-diff/',           label: 'JSON Diff' },
+  { to: '/json-converter/',      label: 'JSON Converter' },
 ];
 
 const MORE_TOOLS = [
-  { to: '/schema/',         label: 'Schema Generator' },
-  { to: '/path-finder/',    label: 'Path Finder' },
-  { to: '/type-generator/', label: 'Type Generator' },
-  { to: '/minifier/',       label: 'JSON Minifier' },
-  { to: '/escape/',         label: 'Escape Tool' },
-  { to: '/prompt-builder/', label: 'Prompt Builder' },
+  { to: '/json-schema/',         label: 'Schema Generator' },
+  { to: '/json-path-finder/',    label: 'Path Finder' },
+  { to: '/json-type-generator/', label: 'Type Generator' },
+  { to: '/json-minifier/',       label: 'JSON Minifier' },
+  { to: '/json-escape/',         label: 'Escape Tool' },
+  { to: '/json-prompt-builder/', label: 'Prompt Builder' },
 ];
 
 const COMPANY = [

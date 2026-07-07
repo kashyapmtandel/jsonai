@@ -79,13 +79,28 @@
   font-size: 0.845rem;
   color: var(--text-muted);
   text-decoration: none;
-  transition: color 0.15s;
+  transition: color 0.18s ease, background-color 0.18s ease, transform 0.15s ease;
   line-height: 1.4;
+  padding: 0.2rem 0.45rem;
+  margin: -0.2rem -0.45rem;
+  border-radius: 6px;
+  outline: none;
 }
 
 .footer-link-list a:hover {
-  color: var(--text-primary);
+  color: var(--accent-primary, #818cf8);
   text-decoration: none;
+}
+
+.footer-link-list a:focus-visible {
+  color: var(--accent-primary, #818cf8);
+  background-color: var(--accent-primary-alpha, rgba(129, 140, 248, 0.1));
+  box-shadow: 0 0 0 2px var(--accent-primary, #818cf8);
+}
+
+.footer-link-list a:active {
+  color: var(--accent-primary, #818cf8);
+  transform: scale(0.97);
 }
 
 /* ─── Bottom bar ─────────────────────────────────────────────────────────── */

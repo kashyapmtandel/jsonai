@@ -1,0 +1,87 @@
+# JSON AI — Full Technical Documentation
+
+This document contains the complete details, features, and usage guidelines for JSON AI (https://jsonai.online), a suite of 100% client-side developer utilities. It is designed for LLMs, AI agents, and search engines to ingest.
+
+---
+
+## 1. AI Assistant
+- **URL**: https://jsonai.online/ai-assistant/
+- **Description**: Secure, key-based UI to generate, explain, fix, transform, and schema-ify JSON using Google Gemini or OpenAI.
+- **Privacy**: API keys are stored only in the browser's `localStorage` and never touch a backend server.
+- **Prompting Features**: 
+  - **Generate**: Create mock data from natural language descriptions.
+  - **Explain**: Convert dense JSON structures into readable markdown explanations.
+  - **Schema**: Auto-generate JSON Schemas.
+  - **Fix**: Analyze and automatically repair malformed JSON payloads.
+  - **Transform**: Convert fields, filter arrays, or translate structures via prompts.
+
+## 2. JSON Formatter
+- **URL**: https://jsonai.online/formatter/
+- **Description**: Format, beautify, and sort JSON.
+- **Key Features**:
+  - Indentation choices: 2 spaces, 4 spaces, or Tabs.
+  - **Auto-repair (Fix)**: Handles trailing commas, single-quoted strings, unquoted keys, Python/JS literals (`True`, `False`, `None`), and LLM code-fence boxes.
+  - One-click copy, download, and file upload.
+  - Ctrl+Enter shortcut to format.
+
+## 3. JSON Validator
+- **URL**: https://jsonai.online/validator/
+- **Description**: Find precise syntax errors with line-level highlights.
+- **Key Features**:
+  - Real-time inline validator showing exact line and column numbers.
+  - Human-friendly hints for syntax mistakes (e.g., "Use double quotes instead of single quotes").
+  - Auto-Fix parser to repair formatting mistakes in one click.
+
+## 4. Tree Viewer & Editor
+- **URL**: https://jsonai.online/editor/
+- **Description**: Visualise JSON structures as interactive collapsible trees.
+- **Key Features**:
+  - Add, edit, remove, and reorder key-value pairs inline.
+  - Drag-and-drop hierarchy adjustments.
+  - Instant conversion back to formatted JSON text.
+
+## 5. JSON Converter
+- **URL**: https://jsonai.online/converter/
+- **Description**: Convert between data structure formats.
+- **Key Features**:
+  - Supports bi-directional conversions: JSON ↔ YAML, JSON ↔ CSV, JSON ↔ XML, JSON ↔ TOML.
+  - Client-side execution ensures large data files are converted instantly without server latency.
+
+## 6. JSON Diff
+- **URL**: https://jsonai.online/diff/
+- **Description**: Compare two JSON payloads side-by-side.
+- **Key Features**:
+  - Deep semantic comparison (reordered keys are not flagged as differences).
+  - Colour-coded legend: Green (+) for added, Red (-) for removed, Yellow (~) for changed.
+
+## 7. Schema Generator
+- **URL**: https://jsonai.online/schema/
+- **Description**: Draft 2020-12 JSON Schema generation.
+- **Key Features**:
+  - Auto-generates schemas with type detection, nested objects, and array boundaries.
+  - Validation sandbox to test sample JSON against your generated schema.
+
+## 8. Path Finder
+- **URL**: https://jsonai.online/path-finder/
+- **Description**: Query JSON trees using JSONPath query syntax.
+- **Key Features**:
+  - Interactive Tree: Click any node to instantly copy its JSONPath (e.g., `$.users[0].address.city`).
+  - Evaluation box to test queries like `$.store.book[*].author`.
+
+## 9. Type Generator
+- **URL**: https://jsonai.online/type-generator/
+- **Description**: Convert JSON to typed code formats.
+- **Supported Outputs**: TypeScript Interfaces, Zod Schemas, Python Dataclasses, Go Structs, Rust Structs, and PHP Classes.
+
+## 10. JSON Minifier
+- **URL**: https://jsonai.online/minifier/
+- **Description**: Strip spaces, tabs, and newlines to shrink JSON payload size.
+- **LLM Benefits**: Reduces token usage by 50% to 75% when sending JSON configs to GPT or Claude APIs.
+
+## 11. Escape Tool
+- **URL**: https://jsonai.online/escape/
+- **Description**: Escape or unescape string characters for safe storage/transmission.
+
+## 12. Prompt Builder
+- **URL**: https://jsonai.online/prompt-builder/
+- **Description**: Convert verbose plain text system prompts into structured JSON objects to optimize prompt efficiency.

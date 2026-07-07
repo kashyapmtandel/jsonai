@@ -40,11 +40,11 @@ const Home = () => {
       >
         <div className="hero-badge">✨ Free Online AI-powered Tools</div>
         <h1 className="hero-title">
-          Smart <span className="gradient-text">JSON Formatter</span>
+          AI-Powered <span className="gradient-text">JSON Developer Tools</span>
         </h1>
         <p className="hero-subtitle">
-          Format, validate, and view JSON data instantly. Supercharge your workflow 
-          with our secure, client-side AI Assistant.
+          Format, validate, and generate JSON instantly. Supercharge your workflow 
+          with our secure, 100% client-side AI Assistant.
         </p>
 
         {/* Search */}

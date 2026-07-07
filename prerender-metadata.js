@@ -14,7 +14,7 @@ const siteUrl = 'https://jsonai.online';
 
 const routes = [
   {
-    route: '/',
+    route: '/', breadcrumbName: 'Home',
     title: 'JSON AI - Free Online JSON Formatter, Validator & Editor',
     description: 'Format, validate, convert, diff, and explore JSON with AI-powered features. Free, fast, and privacy-first.',
     fallbackHtml: `
@@ -31,7 +31,7 @@ const routes = [
     `
   },
   {
-    route: '/ai-assistant',
+    route: '/json-ai-assistant',
     title: 'AI JSON Generator & Assistant Online – Create & Explain JSON | JSON AI',
     description: 'AI-powered JSON generation, explanation, and schema suggestions for developers and teams.',
     fallbackHtml: `
@@ -43,11 +43,29 @@ const routes = [
         <li>Generate JSON from Text: Type plain English (e.g., 'A list of 5 users with emails') and our AI will generate perfectly formatted JSON data in seconds.</li>
         <li>Explain JSON: Paste an obscure JSON payload and the AI will summarize its structure, purpose, and data types in plain language.</li>
         <li>Suggest Schema: Automatically generate a valid JSON Schema based on the data you provide to validate future inputs.</li>
+        <li>Mock Data Generator: Paste a schema or describe a structure to instantly generate dozens of realistic mock records for testing.</li>
+        <li>PII Anonymizer: Sanitize production payloads safely. AI automatically detects and redacts names, emails, and IPs, replacing them with fake data.</li>
       </ul>
-    `
+      <h3>How to Use the AI JSON Assistant</h3>
+      <ol>
+        <li>Navigate to the AI Assistant tool.</li>
+        <li>Type your prompt describing the JSON structure you need.</li>
+        <li>Click 'Generate' to create the JSON, or paste existing JSON and ask the AI to explain or fix it.</li>
+      </ol>
+      <h3>Related Tools</h3>
+      <ul>
+        <li><a href="/json-formatter">JSON Formatter</a></li>
+        <li><a href="/json-schema">JSON Schema Generator</a></li>
+      </ul>
+    `,
+    breadcrumbName: 'AI JSON Assistant',
+    faq: [
+      {q: 'Can the AI JSON Assistant generate mock data?', a: 'Yes, you can describe the exact data structure you need in natural language, and the AI will generate perfectly formatted JSON mock data for your application.'},
+      {q: 'Is my data sent to the cloud?', a: 'If you use your own API keys for OpenAI or Gemini, the requests go directly from your browser to their APIs. JSON AI does not intercept or store your data on our servers.'}
+    ]
   },
   {
-    route: '/prompt-builder',
+    route: '/json-prompt-builder', breadcrumbName: 'Prompt Builder',
     title: 'JSON Prompt Builder – Optimize AI Tokens & Prompts | JSON AI',
     description: 'Compress verbose AI prompts into token-efficient JSON prompts for Gemini, OpenAI, and Claude.',
     fallbackHtml: `
@@ -63,7 +81,7 @@ const routes = [
     `
   },
   {
-    route: '/type-generator',
+    route: '/json-type-generator', breadcrumbName: 'Type Generator',
     title: 'JSON Type Generator – Convert JSON to TypeScript, Go, Rust | JSON AI',
     description: 'Convert JSON into TypeScript, Zod, Pydantic, Go, Rust, and PHP definitions instantly.',
     fallbackHtml: `
@@ -79,7 +97,7 @@ const routes = [
     `
   },
   {
-    route: '/schema',
+    route: '/json-schema',
     title: 'JSON Schema Generator – Generate & Validate JSON Schema | JSON AI',
     description: 'Generate JSON Schema from sample data and validate JSON against schema definitions.',
     fallbackHtml: `
@@ -92,10 +110,26 @@ const routes = [
         <li>Type Detection: Intelligently infers primitive types (string, number, boolean) and detects complex nested objects and arrays.</li>
         <li>Secure Processing: Your sensitive JSON payload never leaves your computer. The schema is generated 100% locally.</li>
       </ul>
-    `
+      <h3>How to Generate JSON Schema</h3>
+      <ol>
+        <li>Provide a sample JSON object or array in the input editor.</li>
+        <li>The tool will automatically parse the data types and structure.</li>
+        <li>Copy the generated Draft-07 JSON Schema from the output panel.</li>
+      </ol>
+      <h3>Related Tools</h3>
+      <ul>
+        <li><a href="/json-type-generator">JSON Type Generator</a></li>
+        <li><a href="/json-validator">JSON Validator</a></li>
+      </ul>
+    `,
+    breadcrumbName: 'JSON Schema Generator',
+    faq: [
+      {q: 'What version of JSON Schema is generated?', a: 'The generator produces Draft-07 compliant JSON Schema, which is widely supported by modern validators.'},
+      {q: 'Can it detect nested arrays and objects?', a: 'Yes, the tool recursively traverses your JSON to accurately map out nested objects and array items.'}
+    ]
   },
   {
-    route: '/minifier',
+    route: '/json-minifier', breadcrumbName: 'JSON Minifier',
     title: 'JSON Minifier – Compress JSON Online to Save AI Tokens | JSON AI',
     description: 'Minify JSON to remove whitespace, reduce payload size, and save tokens in AI prompts.',
     fallbackHtml: `
@@ -111,7 +145,7 @@ const routes = [
     `
   },
   {
-    route: '/formatter',
+    route: '/json-formatter',
     title: 'Free JSON Formatter & Beautifier Online – Read JSON Instantly | JSON AI',
     description: 'Beautify, minify, and reformat JSON with customizable indentation and style options.',
     fallbackHtml: `
@@ -125,10 +159,26 @@ const routes = [
         <li>Syntax Highlighting: Premium dark/light mode syntax highlighting powered by CodeMirror, ensuring perfect readability.</li>
         <li>Tab Size Control: Customize your indentation level with 2-space, 4-space, or tab configurations.</li>
       </ul>
-    `
+      <h3>How to Format JSON</h3>
+      <ol>
+        <li>Paste your raw, minified, or messy JSON into the editor.</li>
+        <li>The formatter will automatically structure and indent the code.</li>
+        <li>Use the toolbar to change indentation spacing or copy the formatted result.</li>
+      </ol>
+      <h3>Related Tools</h3>
+      <ul>
+        <li><a href="/json-validator">JSON Validator</a></li>
+        <li><a href="/json-minifier">JSON Minifier</a></li>
+      </ul>
+    `,
+    breadcrumbName: 'JSON Formatter',
+    faq: [
+      {q: 'How does the JSON Formatter work?', a: 'The formatter parses your raw JSON string and reconstructs it with proper indentation, line breaks, and syntax highlighting.'},
+      {q: 'Does this formatter validate my JSON?', a: 'Yes, if your JSON contains syntax errors, the formatter will highlight the exact line and provide an error message.'}
+    ]
   },
   {
-    route: '/validator',
+    route: '/json-validator',
     title: 'Free JSON Validator & Fixer – Validate JSON Online | JSON AI',
     description: 'Validate JSON structures with detailed error feedback and helpful line guidance.',
     fallbackHtml: `
@@ -141,10 +191,26 @@ const routes = [
         <li>Precise Error Tracking: Unlike standard parsers, our engine pinpoints the exact line and character where the syntax error occurred, acting as a true JSON validator and fixer.</li>
         <li>Secure & Private: Your data never leaves your device. Perfect for validating production API payloads containing sensitive customer data.</li>
       </ul>
-    `
+      <h3>How to Validate JSON</h3>
+      <ol>
+        <li>Paste your JSON payload into the validation window.</li>
+        <li>The tool instantly checks for missing commas, unquoted keys, and trailing brackets.</li>
+        <li>Click the Auto-Fix button to repair common structural errors automatically.</li>
+      </ol>
+      <h3>Related Tools</h3>
+      <ul>
+        <li><a href="/json-formatter">JSON Formatter</a></li>
+        <li><a href="/json-diff">JSON Diff Checker</a></li>
+      </ul>
+    `,
+    breadcrumbName: 'JSON Validator',
+    faq: [
+      {q: 'Can this tool fix invalid JSON?', a: 'Yes, the JSON Validator includes an Auto-Fix feature that repairs common issues like trailing commas or missing quotes.'},
+      {q: 'Is the JSON Validator secure?', a: 'Absolutely. All validation happens locally in your browser. We never send your JSON data to external servers.'}
+    ]
   },
   {
-    route: '/converter',
+    route: '/json-converter', breadcrumbName: 'JSON Converter',
     title: 'Free JSON Converter – Convert JSON to YAML, CSV, XML, TOML | JSON AI',
     description: 'Convert JSON to CSV, YAML, XML, TOML, and back with a powerful browser-based tool.',
     fallbackHtml: `
@@ -161,7 +227,7 @@ const routes = [
     `
   },
   {
-    route: '/diff',
+    route: '/json-diff', breadcrumbName: 'JSON Diff',
     title: 'JSON Diff Checker – Compare Two JSON Files Side-by-Side | JSON AI',
     description: 'Compare two JSON documents side by side with semantic diff highlighting.',
     fallbackHtml: `
@@ -177,7 +243,7 @@ const routes = [
     `
   },
   {
-    route: '/path-finder',
+    route: '/json-path-finder', breadcrumbName: 'Path Finder',
     title: 'JSONPath Finder & Query Tool – Filter JSON Online | JSON AI',
     description: 'Explore JSON paths interactively and query data using JSONPath expressions.',
     fallbackHtml: `
@@ -193,7 +259,7 @@ const routes = [
     `
   },
   {
-    route: '/editor',
+    route: '/json-editor', breadcrumbName: 'JSON Editor',
     title: 'Visual JSON Tree Editor – Edit JSON Interactively Online | JSON AI',
     description: 'Visual JSON tree editor with inline node editing and live code sync.',
     fallbackHtml: `
@@ -209,7 +275,7 @@ const routes = [
     `
   },
   {
-    route: '/escape',
+    route: '/json-escape', breadcrumbName: 'JSON Escape',
     title: 'JSON Escape & Unescape Tool – Format Safe JSON Strings | JSON AI',
     description: 'Escape and unescape JSON strings for safe embedding in code and data formats.',
     fallbackHtml: `
@@ -307,7 +373,8 @@ const replaceMeta = (html, replacements) => {
   return updated;
 };
 
-const createRouteFile = ({ route, title, description, fallbackHtml = '' }) => {
+const createRouteFile = (routeData) => {
+  const { route, title, description, fallbackHtml = '' } = routeData;
   const routePath = route.replace(/^\//, '');
   const targetDir = path.join(distDir, routePath);
   fs.mkdirSync(targetDir, { recursive: true });
@@ -334,25 +401,63 @@ const createRouteFile = ({ route, title, description, fallbackHtml = '' }) => {
     );
   }
 
-  // Inject structured SoftwareApplication schema into head
-  const toolSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": title,
-    "url": pageUrl,
-    "description": description,
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Any",
-    "browserRequirements": "Requires JavaScript and a modern web browser.",
-    "isAccessibleForFree": true,
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+  // Inject structured schemas into head
+  const schemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": title,
+      "url": pageUrl,
+      "description": description,
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and a modern web browser.",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
     }
-  };
+  ];
 
-  const schemaScript = `  <script type="application/ld+json">\n  ${JSON.stringify(toolSchema, null, 2)}\n  </script>\n</head>`;
+  if (routeData.faq && routeData.faq.length > 0) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": routeData.faq.map(q => ({
+        "@type": "Question",
+        "name": q.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": q.a
+        }
+      }))
+    });
+  }
+
+  if (routeData.breadcrumbName) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": siteUrl + "/"
+        },
+        ...(routeData.route !== '/' ? [{
+          "@type": "ListItem",
+          "position": 2,
+          "name": routeData.breadcrumbName,
+          "item": pageUrl
+        }] : [])
+      ]
+    });
+  }
+
+  const schemaScript = `  <script type="application/ld+json">\n  ${JSON.stringify(schemas, null, 2)}\n  </script>\n</head>`;
   html = html.replace('</head>', schemaScript);
 
   fs.writeFileSync(path.join(targetDir, 'index.html'), html, 'utf8');

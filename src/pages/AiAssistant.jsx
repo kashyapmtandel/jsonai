@@ -8,7 +8,7 @@ import TabGroup from '../components/TabGroup';
 import {
   Sparkles, Trash2, Send, KeyRound, ChevronDown, ChevronUp,
   Eye, EyeOff, Download, Wand2, BookOpen, FileJson,
-  Wrench, Shuffle, ExternalLink, Lock,
+  Wrench, Shuffle, ExternalLink, Lock, Database, ShieldCheck
 } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { callGemini, callOpenAI } from '../utils/ai';
@@ -61,6 +61,24 @@ const MODES = [
     placeholder: 'Paste your JSON, then describe the transformation:\n\nExample:\n{\n  "users": [...]\n}\n\nPlease extract only the id and email fields from each user.',
     useTextarea: false,
   },
+  {
+    id: 'mock',
+    label: 'Mock',
+    icon: Database,
+    desc: 'Generate realistic mock data arrays based on a schema or structural description.',
+    inputLabel: 'Schema or Description',
+    placeholder: 'Paste a JSON Schema, or describe the structure to generate mock data:\n\nExample:\nGenerate 20 records of users with id, full_name, email, and phone_number.',
+    useTextarea: true,
+  },
+  {
+    id: 'anonymize',
+    label: 'Anonymize',
+    icon: ShieldCheck,
+    desc: 'Sanitize production JSON by automatically redacting PII (names, emails, IPs, etc.) and replacing it with fake data.',
+    inputLabel: 'Production JSON',
+    placeholder: 'Paste your production JSON here to anonymize it...',
+    useTextarea: false,
+  },
 ];
 
 const PROVIDERS = [
@@ -86,6 +104,14 @@ const QUICK_PROMPTS = {
     'Rename "userId" to "id" and "userName" to "name"',
     'Group items by category',
   ],
+  mock: [
+    'Generate 15 users with realistic names, emails, and avatars',
+    'Generate 10 eCommerce products with variants and SKUs',
+  ],
+  anonymize: [
+    'Redact all names, emails, and phone numbers',
+    'Replace all IP addresses and location data with fake values',
+  ],
 };
 
 // ─── System prompts ───────────────────────────────────────────────────────────
@@ -101,6 +127,10 @@ const getSystemPrompt = (mode) => {
       return 'You are a JSON repair expert. The user will paste broken JSON. First output the repaired, valid JSON, then on a new line starting with "---EXPLANATION---", briefly explain what was wrong and what you fixed. Keep the explanation concise.';
     case 'transform':
       return 'You are a JSON transformation expert. The user will paste JSON followed by transformation instructions. Apply the described transformation and respond with ONLY the resulting valid JSON — no explanations, no markdown fences.';
+    case 'mock':
+      return 'You are a mock data generator. The user will provide a schema or description. You must generate realistic, high-quality mock data matching the request. Respond with ONLY valid, well-structured JSON — no explanations, no markdown fences.';
+    case 'anonymize':
+      return 'You are a data privacy expert. The user will paste JSON containing sensitive PII (names, emails, phone numbers, IPs, addresses). Redact the PII and replace it with realistic fake data. Keep the structure identical. Respond with ONLY the sanitized JSON — no explanations, no markdown fences.';
     default:
       return '';
   }
@@ -443,6 +473,8 @@ const AiAssistant = () => {
           { title: 'Generate Schema', desc: 'Automatically create a valid JSON Schema (Draft 2020-12) from any JSON sample.' },
           { title: 'Fix Broken JSON', desc: 'Paste malformed JSON and the AI will repair it and explain exactly what was wrong.' },
           { title: 'Transform JSON', desc: 'Describe how to reshape your JSON — filter fields, rename keys, flatten arrays — and get the result instantly.' },
+          { title: 'Mock Data Generator', desc: 'Paste a JSON Schema or describe a structure to instantly generate dozens of realistic mock records for testing.' },
+          { title: 'PII Anonymizer', desc: 'Sanitize production payloads safely. AI automatically detects and redacts names, emails, and IPs, replacing them with fake data.' },
           { title: '100% Private', desc: 'Your API key and JSON data are never sent to our servers. Everything runs directly between your browser and the AI provider.' },
         ]}
         faq={[

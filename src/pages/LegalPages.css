@@ -114,3 +114,74 @@
   max-width: 600px;
   margin: 0 auto;
 }
+
+/* ─── About page tool links ──────────────────────────────────────────────── */
+.about-tool-list {
+  list-style: none;
+  padding: 0;
+}
+
+.about-tool-list li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border-color);
+  line-height: 1.6;
+}
+
+.about-tool-list li:last-child {
+  border-bottom: none;
+}
+
+.about-tool-list a {
+  color: var(--accent-color, #818cf8);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.18s ease, opacity 0.18s ease;
+  border-radius: 4px;
+  outline: none;
+}
+
+.about-tool-list a:hover {
+  opacity: 0.8;
+}
+
+.about-tool-list a:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent-color, #818cf8);
+  outline: none;
+}
+
+/* ─── Social / external links ────────────────────────────────────────────── */
+.about-social-link {
+  color: var(--accent-color, #818cf8);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.18s ease;
+  border-radius: 4px;
+  outline: none;
+}
+
+.about-social-link:hover {
+  opacity: 0.8;
+}
+
+.about-social-link:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent-color, #818cf8);
+  outline: none;
+}
+
+/* ─── Legal page links (general) ─────────────────────────────────────────── */
+.legal-content a {
+  color: var(--accent-color, #818cf8);
+  text-decoration: none;
+  transition: opacity 0.18s ease;
+  border-radius: 4px;
+  outline: none;
+}
+
+.legal-content a:hover {
+  opacity: 0.8;
+}
+
+.legal-content a:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent-color, #818cf8);
+  outline: none;
+}

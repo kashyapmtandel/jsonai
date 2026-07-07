@@ -4,7 +4,7 @@ import { Braces, Sun, Moon, Menu, X, ChevronDown } from 'lucide-react';
 import tools from '../data/tools';
 import './Navbar.css';
 
-const primaryRoutes = ['/ai-assistant/', '/formatter/', '/validator/', '/editor/'];
+const primaryRoutes = ['/json-ai-assistant/', '/json-formatter/', '/json-validator/', '/json-editor/'];
 const primaryNavItems = tools.filter((t) => primaryRoutes.includes(t.to));
 const moreNavItems = tools.filter((t) => !primaryRoutes.includes(t.to));
 
