@@ -14,8 +14,8 @@
     gtag('config', 'G-V3YTY4L13S');
   </script>
   
-  <!-- Google AdSense Verification Code -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-713571842171973"
+<!-- Google AdSense Verification Code -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7135718421741973"
      crossorigin="anonymous"></script>
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
@@ -93,7 +93,7 @@
     "JSON Diff and Compare",
     "JSON Schema Generator",
     "JSONPath Explorer",
-    "AI JSON Assistant",
+    "JSON AI Assistant",
     "AI Type and Validation Generator",
     "JSON Minifier for LLM token savings",
     "JSON Prompt Builder"
@@ -109,10 +109,10 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is an AI JSON Assistant?",
+      "name": "What is a JSON AI Assistant?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "An AI JSON Assistant is a tool that uses large language models (like Gemini or OpenAI) to generate mock JSON data, explain complex JSON structures, fix syntax errors, and transform data using natural language prompts."
+        "text": "A JSON AI Assistant is a tool that uses large language models (like Gemini or OpenAI) to generate mock JSON data, explain complex JSON structures, fix syntax errors, and transform data using natural language prompts."
       }
     },
     {
@@ -150,7 +150,7 @@
       place-items: center;
       padding: 24px;
       color: #eef2ff;
-      background: #1a1d2e;
+      background: #0f1117;
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
@@ -182,16 +182,31 @@
       white-space: nowrap;
       border: 0;
     }
+
+    /* Hide all fallback content visually — search engines still read it,
+       but users see only the dark background until React mounts */
+    .app-shell-fallback,
+    .fallback-seo-content {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
   </style>
 </head>
 <body>
-  <div id="root">
+  <div id="root" style="min-height:100vh">
     <header class="app-shell-fallback" style="text-align:center;padding:2rem 1rem 1rem">
       <h1 id="fallback-tools-heading" class="app-shell-fallback__title">JSON AI — Free Online JSON Formatter, Validator &amp; Beautifier</h1>
       <p class="app-shell-fallback__text">Your all-in-one suite of secure, client-side, and AI-powered JSON utilities. Format, validate, convert, compare, minify, and explore JSON instantly — 100% in your browser, no data ever leaves your device.</p>
     </header>
 
-    <main style="max-width:860px;margin:0 auto;padding:1.5rem 1rem 3rem;font-family:Inter,sans-serif;color:#c0c8dc;line-height:1.7">
+    <main class="fallback-seo-content" style="max-width:860px;margin:0 auto;padding:1.5rem 1rem 3rem;font-family:Inter,sans-serif;color:#c0c8dc;line-height:1.7">
       <section>
         <h2 style="color:#eef2ff">Free JSON Tools — No Sign-up Required</h2>
         <p>JSON AI provides a complete set of developer tools that run entirely in your browser. Whether you need to quickly format a messy API response, validate JSON syntax before deployment, convert JSON to CSV for a spreadsheet, or generate TypeScript types from a JSON payload, JSON AI has you covered — for free, forever.</p>
@@ -211,7 +226,7 @@
       </section>
 
       <section style="margin-top:1.5rem">
-        <h2 style="color:#eef2ff">AI JSON Assistant</h2>
+        <h2 style="color:#eef2ff">JSON AI Assistant</h2>
         <p>Generate, explain, and transform JSON using Google Gemini and OpenAI models. Describe the data structure you need in plain English — like "a list of 10 users with names, emails, and roles" — and the AI will produce perfectly formatted JSON in seconds. You can also paste existing JSON and ask the assistant to explain its structure, suggest improvements, or generate a matching JSON Schema.</p>
         <a href="/json-ai-assistant/" style="color:#818cf8">Open AI Assistant →</a>
       </section>

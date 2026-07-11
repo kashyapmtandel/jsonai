@@ -13,21 +13,66 @@ import { repairJson } from '../utils/jsonFormatter';
 import './Validator.css';
 
 // ─── Human-friendly error hints ───────────────────────────────────────────────
-const getFriendlyHint = (message) => {
+const getFriendlyHint = (message, input) => {
   if (!message) return null;
   const m = message.toLowerCase();
+
+  // Trailing comma
   if (m.includes('trailing comma') || (m.includes('unexpected token') && (m.includes('}') || m.includes(']'))))
-    return 'Hint: Remove the trailing comma before the closing } or ]';
+    return 'Hint: Remove the trailing comma before the closing } or ]. JSON does not allow trailing commas.';
+
+  // Single quotes
   if (m.includes("'") || m.includes('single quote'))
-    return 'Hint: JSON requires double quotes "like this", not single quotes \'like this\'';
+    return 'Hint: JSON requires double quotes "like this", not single quotes \'like this\'. Click Auto-Fix to convert them.';
+
+  // undefined
   if (m.includes('undefined') || m.includes('u in json'))
-    return 'Hint: JSON does not support undefined — use null instead';
+    return 'Hint: JSON does not support undefined — use null instead.';
+
+  // Python-style booleans / None
   if (m.includes('true') || m.includes('false') || m.includes('none'))
-    return 'Hint: Boolean values must be lowercase: true, false (not True / False / None)';
-  if (m.includes('unexpected end') || m.includes('end of json'))
-    return 'Hint: JSON is incomplete — check for a missing closing } or ]';
+    return 'Hint: Boolean values must be lowercase: true, false (not True / False). Use null instead of None. Click Auto-Fix to repair.';
+
+  // Unexpected end of input (incomplete JSON)
+  if (m.includes('unexpected end') || m.includes('end of json') || m.includes('end of input'))
+    return 'Hint: JSON is incomplete — check for a missing closing } or ]. Count your opening and closing brackets.';
+
+  // Unquoted keys
   if (m.includes('expected property name') || m.includes('bad control character'))
-    return 'Hint: Object keys must be double-quoted strings: "key": value';
+    return 'Hint: Object keys must be double-quoted strings: "key": value. Click Auto-Fix to add quotes.';
+
+  // Comments in JSON (very common mistake)
+  if (input && (/\/\/[^\n]*/.test(input) || /\/\*[\s\S]*?\*\//.test(input)))
+    return 'Hint: Standard JSON does not support comments (// or /* */). Remove them or use JSONC format. Click Auto-Fix to strip them.';
+
+  // Hex numbers (0xFF)
+  if (input && /\b0x[0-9a-fA-F]+\b/.test(input))
+    return 'Hint: JSON does not support hexadecimal numbers (0xFF). Convert them to decimal values.';
+
+  // Infinity / -Infinity / NaN
+  if (input && /\b(Infinity|-Infinity|NaN)\b/.test(input))
+    return 'Hint: JSON does not support Infinity or NaN. Use null or a string representation instead. Click Auto-Fix to convert NaN to null.';
+
+  // Multi-line strings (template literals or escaped newlines)
+  if (m.includes('bad string') || m.includes('bad escape') || m.includes('unterminated string'))
+    return 'Hint: JSON strings cannot span multiple lines. Use \\n for newlines inside strings. Also check for unescaped backslashes.';
+
+  // Missing comma between properties
+  if (m.includes('expected \',\'') || m.includes('expected comma'))
+    return 'Hint: You are probably missing a comma between two properties or array items.';
+
+  // Duplicate keys
+  if (m.includes('duplicate'))
+    return 'Hint: This JSON has duplicate keys. While technically parseable, duplicate keys can cause unpredictable behavior. Remove or rename duplicates.';
+
+  // Expected colon
+  if (m.includes('expected \':\'' ) || m.includes('expected colon'))
+    return 'Hint: A colon is missing between a key and its value. Format should be "key": value.';
+
+  // Unexpected number format
+  if (m.includes('unexpected number') || m.includes('leading zero'))
+    return 'Hint: JSON numbers cannot have leading zeros (e.g., 012). Remove the leading zero or quote it as a string.';
+
   return null;
 };
 
@@ -112,7 +157,7 @@ const Validator = () => {
         line   = parseInt(lineMatch[1]);
         column = colMatch ? parseInt(colMatch[1]) : null;
       }
-      setResult({ valid: false, message: e.message, hint: getFriendlyHint(e.message), line, column });
+      setResult({ valid: false, message: e.message, hint: getFriendlyHint(e.message, t), line, column });
     }
   }, []);
 

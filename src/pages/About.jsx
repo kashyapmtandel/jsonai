@@ -49,7 +49,7 @@ export default function About() {
           <ul className="about-tool-list">
             <li><RouteLink to="/json-formatter/">JSON Formatter & Beautifier</RouteLink> — Instantly format messy JSON with customizable indentation.</li>
             <li><RouteLink to="/json-validator/">JSON Validator & Fixer</RouteLink> — Detect and auto-fix syntax errors with precise line-level feedback.</li>
-            <li><RouteLink to="/json-ai-assistant/">AI JSON Assistant</RouteLink> — Generate, explain, and transform JSON using Gemini and OpenAI.</li>
+            <li><RouteLink to="/json-ai-assistant/">JSON AI Assistant</RouteLink> — Generate, explain, and transform JSON using Gemini and OpenAI.</li>
             <li><RouteLink to="/json-converter/">JSON Converter</RouteLink> — Convert between JSON, CSV, YAML, XML, and TOML instantly.</li>
             <li><RouteLink to="/json-schema/">JSON Schema Generator</RouteLink> — Auto-generate Draft-07 JSON Schema from any JSON document.</li>
             <li><RouteLink to="/json-diff/">JSON Diff</RouteLink> — Compare two JSON documents with semantic diff highlighting.</li>

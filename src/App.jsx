@@ -45,7 +45,7 @@ function App() {
       <Navbar />
       <main style={{ flex: 1, minHeight: 'calc(100vh - 112px)', paddingTop: '56px' }}>
         <Suspense fallback={null}>
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/json-formatter/" element={<Formatter />} />

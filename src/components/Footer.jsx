@@ -1,5 +1,6 @@
 import RouteLink from './RouteLink';
 import { Heart, Braces, Lock } from 'lucide-react';
+import AdBanner from './AdBanner';
 import './Footer.css';
 
 const CORE_TOOLS = [
@@ -32,6 +33,9 @@ const Footer = () => {
 
   return (
     <footer className="footer">
+      <div style={{ padding: '0 20px', marginBottom: '32px' }}>
+        <AdBanner slot="9322108780" />
+      </div>
       <div className="footer-inner">
 
         {/* ── Brand column ── */}

@@ -3,7 +3,7 @@ import ToolLayout from '../components/ToolLayout';
 import CodeEditor from '../components/CodeEditor';
 import ActionBar from '../components/ActionBar';
 import SeoContent from '../components/SeoContent';
-import { Target, Search, Check, FileText, Trash2, ChevronRight, ChevronDown, CheckCircle, XCircle } from 'lucide-react';
+import { Target, Search, Check, FileText, Trash2, ChevronRight, ChevronDown, CheckCircle, XCircle, Sparkles } from 'lucide-react';
 import { queryJsonPath } from '../utils/jsonPath';
 import { sampleNestedJson } from '../utils/sampleData';
 import { useClipboard } from '../hooks/useClipboard';
@@ -90,6 +90,77 @@ const PathFinder = () => {
   const [parsed, setParsed]             = useState(null);
   const [parseError, setParseError]     = useState('');
 
+  // ─── Smart path suggestions ──────────────────────────────────────────────
+  const suggestions = useMemo(() => {
+    if (!parsed) return [];
+    const hints = [];
+    const isRoot = (v) => v === parsed;
+
+    // Root is array
+    if (Array.isArray(parsed)) {
+      hints.push({ label: 'First item', path: '$[0]' });
+      if (parsed.length > 1) hints.push({ label: 'Last item', path: `$[${parsed.length - 1}]` });
+      if (parsed.length > 0 && typeof parsed[0] === 'object' && parsed[0] !== null) {
+        const keys = Object.keys(parsed[0]);
+        for (const k of ['id', 'name', 'email', 'title', 'status', 'type']) {
+          if (keys.includes(k)) hints.push({ label: `All ${k}s`, path: `$[*].${k}` });
+        }
+        // Filter suggestion if status/type exists
+        if (keys.includes('status'))
+          hints.push({ label: 'Filter by status', path: "$[?(@.status=='active')]" });
+        if (keys.includes('type'))
+          hints.push({ label: 'Filter by type', path: "$[?(@.type=='admin')]" });
+      }
+    }
+
+    // Root is object
+    if (typeof parsed === 'object' && !Array.isArray(parsed) && parsed !== null) {
+      const rootKeys = Object.keys(parsed);
+      hints.push({ label: 'All root keys', path: '$.*' });
+
+      // Find arrays in root
+      for (const k of rootKeys) {
+        if (Array.isArray(parsed[k]) && parsed[k].length > 0) {
+          hints.push({ label: `${k} count`, path: `$.${k}.length` });
+          hints.push({ label: `All ${k}`, path: `$.${k}[*]` });
+          const first = parsed[k][0];
+          if (typeof first === 'object' && first !== null) {
+            const itemKeys = Object.keys(first);
+            for (const ik of ['id', 'name', 'email', 'title']) {
+              if (itemKeys.includes(ik)) {
+                hints.push({ label: `${k} → ${ik}s`, path: `$.${k}[*].${ik}` });
+              }
+            }
+          }
+        }
+      }
+
+      // Find deeply nested paths (up to depth 3)
+      const findDeep = (obj, path, depth) => {
+        if (depth > 3 || typeof obj !== 'object' || obj === null) return;
+        for (const [k, v] of Object.entries(obj)) {
+          const p = Array.isArray(obj) ? `${path}[${k}]` : `${path}.${k}`;
+          if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
+            findDeep(v, p, depth + 1);
+          } else if (depth >= 2 && typeof v !== 'object') {
+            // Suggest deep leaf values
+            hints.push({ label: `Deep: ${k}`, path: p });
+            return; // just one deep suggestion
+          }
+        }
+      };
+      findDeep(parsed, '$', 0);
+    }
+
+    // Deduplicate by path and limit to 8
+    const seen = new Set();
+    return hints.filter(h => {
+      if (seen.has(h.path)) return false;
+      seen.add(h.path);
+      return true;
+    }).slice(0, 8);
+  }, [parsed]);
+
   const inputStatus = useMemo(() => {
     const t = input.trim();
     if (!t) return null;
@@ -157,6 +228,29 @@ const PathFinder = () => {
           </div>
         )}
       </div>
+
+      {/* Smart path suggestions */}
+      {suggestions.length > 0 && (
+        <div className="pf-suggestions">
+          <div className="pf-suggestions-header">
+            <Sparkles size={13} />
+            <span>Smart Suggestions</span>
+          </div>
+          <div className="pf-suggestion-chips">
+            {suggestions.map((s, i) => (
+              <button
+                key={i}
+                className="pf-suggestion-chip"
+                onClick={() => { setQuery(s.path); }}
+                title={`Set query to: ${s.path}`}
+              >
+                <span className="pf-chip-label">{s.label}</span>
+                <code className="pf-chip-path">{s.path}</code>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* JSONPath query bar */}
       <div className="path-query-bar">

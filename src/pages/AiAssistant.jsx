@@ -247,7 +247,7 @@ const AiAssistant = () => {
 
   return (
     <ToolLayout
-      title="AI JSON Assistant"
+      title="JSON AI Assistant"
       description="Generate, explain, fix, transform, and schema-ify JSON using Google Gemini or OpenAI."
       icon={Sparkles}
     >
@@ -462,9 +462,9 @@ const AiAssistant = () => {
       </div>
 
       <SeoContent
-        title="AI JSON Generator, Explainer & Assistant — Free Online"
+        title="JSON AI Generator, Explainer & Assistant — Free Online"
         description={[
-          'The AI JSON Assistant uses Google Gemini and OpenAI to generate, explain, fix, transform, and schema-ify JSON in seconds. Describe what you need in plain English — the AI writes the JSON for you.',
+          'The JSON AI Assistant uses Google Gemini and OpenAI to generate, explain, fix, transform, and schema-ify JSON in seconds. Describe what you need in plain English — the AI writes the JSON for you.',
           'Your API key is stored only in your browser. Nothing is sent to our servers. Use it to create mock data, debug malformed API responses, generate JSON Schemas, or reshape complex JSON structures.',
         ]}
         features={[

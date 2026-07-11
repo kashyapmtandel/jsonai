@@ -280,8 +280,73 @@
 .tree-path-label.copied { color: var(--success); opacity: 1; }
 .tree-row:hover .tree-path-label { opacity: 1; }
 
+/* ─── Smart Suggestions ──────────────────────────────────────────────────── */
+.pf-suggestions {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.pf-suggestions-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.pf-suggestions-header svg {
+  color: #818cf8;
+}
+
+.pf-suggestion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.pf-suggestion-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.pf-suggestion-chip:hover {
+  border-color: #818cf8;
+  background: rgba(129, 140, 248, 0.08);
+  color: var(--text-primary);
+}
+
+.pf-chip-label {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.pf-chip-path {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #818cf8;
+  background: rgba(129, 140, 248, 0.08);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .pathfinder-layout { grid-template-columns: 1fr; }
   .pf-status-bar     { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+  .pf-suggestion-chips { overflow-x: auto; flex-wrap: nowrap; }
 }

@@ -1,0 +1,23 @@
+.ad-banner-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  min-height: 0;
+  transition: min-height 0.3s ease, opacity 0.3s ease;
+}
+
+/* Only show border/padding once ad is confirmed loaded */
+.ad-banner--loaded {
+  border-radius: 12px;
+  background: var(--bg-elevated, #1a1d2e);
+  border: 1px solid var(--border-color, #2a2d3e);
+  padding: 12px;
+  min-height: 90px;
+}
+
+/* Ensure the ad itself renders cleanly */
+.ad-banner-container ins {
+  position: relative;
+  z-index: 1;
+}

@@ -4,8 +4,8 @@ import CodeEditor from '../components/CodeEditor';
 import ActionBar from '../components/ActionBar';
 import CopyButton from '../components/CopyButton';
 import SeoContent from '../components/SeoContent';
-import { GitCompare, Trash2, FileText, RefreshCw, Upload, CheckCircle, XCircle, ArrowLeftRight } from 'lucide-react';
-import { computeDiff, formatDiffAsHtml, getDiffStats } from '../utils/jsonDiff';
+import { GitCompare, Trash2, FileText, RefreshCw, Upload, CheckCircle, XCircle, ArrowLeftRight, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
+import { computeDiff, formatDiffAsHtml, getDiffStats, generateDiffSummary } from '../utils/jsonDiff';
 import { sampleJson } from '../utils/sampleData';
 import './DiffTool.css';
 
@@ -29,6 +29,8 @@ const DiffTool = () => {
   const [right, setRight]   = useState('');
   const [diffHtml, setDiffHtml] = useState('');
   const [stats, setStats]   = useState(null);
+  const [summary, setSummary] = useState([]);
+  const [summaryOpen, setSummaryOpen] = useState(true);
   const [error, setError]   = useState('');
   const leftFileRef  = useRef(null);
   const rightFileRef = useRef(null);
@@ -57,11 +59,14 @@ const DiffTool = () => {
       const delta = computeDiff(left, right);
       setDiffHtml(formatDiffAsHtml(delta));
       setStats(getDiffStats(delta));
+      setSummary(generateDiffSummary(delta));
+      setSummaryOpen(true);
       setError('');
     } catch (e) {
       setError(e.message);
       setDiffHtml('');
       setStats(null);
+      setSummary([]);
     }
   }, [left, right]);
 
@@ -81,7 +86,7 @@ const DiffTool = () => {
   }, [left, right]);
 
   const handleClear = useCallback(() => {
-    setLeft(''); setRight(''); setDiffHtml(''); setStats(null); setError('');
+    setLeft(''); setRight(''); setDiffHtml(''); setStats(null); setSummary([]); setError('');
   }, []);
 
   const handleFileUpload = (side) => (e) => {
@@ -141,6 +146,33 @@ const DiffTool = () => {
           </div>
           {stats.total > 0 && (
             <span className="diff-total">{stats.total} difference{stats.total !== 1 ? 's' : ''}</span>
+          )}
+        </div>
+      )}
+
+      {/* Smart Change Summary */}
+      {summary.length > 0 && (
+        <div className="diff-smart-summary">
+          <button
+            className="diff-smart-summary-toggle"
+            onClick={() => setSummaryOpen(!summaryOpen)}
+          >
+            <Sparkles size={14} />
+            <span>Smart Change Summary</span>
+            <span className="diff-smart-count">{summary.length} change{summary.length !== 1 ? 's' : ''}</span>
+            {summaryOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+          </button>
+          {summaryOpen && (
+            <ul className="diff-smart-list">
+              {summary.map((item, i) => (
+                <li key={i} className={`diff-smart-item diff-smart-item--${item.type}`}>
+                  <span className="diff-smart-bullet">
+                    {item.type === 'added' ? '+' : item.type === 'removed' ? '−' : '~'}
+                  </span>
+                  {item.text}
+                </li>
+              ))}
+            </ul>
           )}
         </div>
       )}

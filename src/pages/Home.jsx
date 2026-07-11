@@ -96,7 +96,7 @@ const Home = () => {
           "Every tool in the JSON AI suite executes directly in your browser. We never upload or save your sensitive JSON configurations, database models, API keys, or custom payloads. It is 100% secure, private, and optimized for immediate client-side execution."
         ]}
         features={[
-          { title: "AI JSON Assistant", desc: "Instantly draft JSON stubs, get schema feedback, or clarify complex objects in plain human English using Google Gemini and OpenAI models." },
+          { title: "JSON AI Assistant", desc: "Instantly draft JSON stubs, get schema feedback, or clarify complex objects in plain human English using Google Gemini and OpenAI models." },
           { title: "JSON Formatting & Minification", desc: "Format messy nested structures with custom tab spacing, or compress JSON data to save up to 75% tokens when building AI prompts." },
           { title: "Syntax Error Correction", desc: "Identify missing commas, unquoted keys, and nested brackets with real-time, line-by-line syntax highlighting and error guides." },
           { title: "Cross-Format Conversions", desc: "Convert standard JSON payloads into XML structures, clean YAML lists, TOML configs, or CSV spreadsheets for quick analysis." }

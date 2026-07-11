@@ -23,7 +23,7 @@ const routes = [
       <p>Every tool in the JSON AI suite executes directly in your browser. We never upload or save your sensitive JSON configurations, database models, API keys, or custom payloads. It is 100% secure, private, and optimized for immediate client-side execution.</p>
       <h3>Key Features</h3>
       <ul>
-        <li>AI JSON Assistant: Instantly draft JSON stubs, get schema feedback, or clarify complex objects in plain human English using Google Gemini and OpenAI models.</li>
+        <li>JSON AI Assistant: Instantly draft JSON stubs, get schema feedback, or clarify complex objects in plain human English using Google Gemini and OpenAI models.</li>
         <li>JSON Formatting & Minification: Format messy nested structures with custom tab spacing, or compress JSON data to save up to 75% tokens when building AI prompts.</li>
         <li>Syntax Error Correction: Identify missing commas, unquoted keys, and nested brackets with real-time, line-by-line syntax highlighting and error guides.</li>
         <li>Cross-Format Conversions: Convert standard JSON payloads into XML structures, clean YAML lists, TOML configs, or CSV spreadsheets for quick analysis.</li>
@@ -32,11 +32,11 @@ const routes = [
   },
   {
     route: '/json-ai-assistant',
-    title: 'AI JSON Generator & Assistant Online – Create & Explain JSON | JSON AI',
+    title: 'JSON AI Generator & Assistant Online – Create & Explain JSON | JSON AI',
     description: 'AI-powered JSON generation, explanation, and schema suggestions for developers and teams.',
     fallbackHtml: `
-      <h2>AI JSON Generator & Assistant Online</h2>
-      <p>Say goodbye to manually typing out JSON stubs or wrestling with complex structures. Our AI JSON Generator uses advanced models like Google Gemini and OpenAI to write, fix, and explain JSON code for you instantly.</p>
+      <h2>JSON AI Generator & Assistant Online</h2>
+      <p>Say goodbye to manually typing out JSON stubs or wrestling with complex structures. Our JSON AI Generator uses advanced models like Google Gemini and OpenAI to write, fix, and explain JSON code for you instantly.</p>
       <p>Whether you need mock data for a database, a simulated API response, or help understanding a deeply nested JSON structure, this tool does the heavy lifting for you.</p>
       <h3>Key Features</h3>
       <ul>
@@ -46,7 +46,7 @@ const routes = [
         <li>Mock Data Generator: Paste a schema or describe a structure to instantly generate dozens of realistic mock records for testing.</li>
         <li>PII Anonymizer: Sanitize production payloads safely. AI automatically detects and redacts names, emails, and IPs, replacing them with fake data.</li>
       </ul>
-      <h3>How to Use the AI JSON Assistant</h3>
+      <h3>How to Use the JSON AI Assistant</h3>
       <ol>
         <li>Navigate to the AI Assistant tool.</li>
         <li>Type your prompt describing the JSON structure you need.</li>
@@ -58,9 +58,9 @@ const routes = [
         <li><a href="/json-schema">JSON Schema Generator</a></li>
       </ul>
     `,
-    breadcrumbName: 'AI JSON Assistant',
+    breadcrumbName: 'JSON AI Assistant',
     faq: [
-      {q: 'Can the AI JSON Assistant generate mock data?', a: 'Yes, you can describe the exact data structure you need in natural language, and the AI will generate perfectly formatted JSON mock data for your application.'},
+      {q: 'Can the JSON AI Assistant generate mock data?', a: 'Yes, you can describe the exact data structure you need in natural language, and the AI will generate perfectly formatted JSON mock data for your application.'},
       {q: 'Is my data sent to the cloud?', a: 'If you use your own API keys for OpenAI or Gemini, the requests go directly from your browser to their APIs. JSON AI does not intercept or store your data on our servers.'}
     ]
   },
