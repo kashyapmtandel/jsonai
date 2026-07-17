@@ -14,15 +14,27 @@ export const callGemini = async (apiKey, systemPrompt, userMessage) => {
   const availableModels = modelsData.models || [];
   
   // 2. Find the best available model that supports text generation
+  // Dynamically find the newest Gemini Flash or Pro model to prevent deprecation errors
   let targetModel = '';
   const supportsGenerate = (m) => m.supportedGenerationMethods?.includes('generateContent');
   
-  if (availableModels.some(m => m.name === 'models/gemini-1.5-flash' && supportsGenerate(m))) {
-    targetModel = 'models/gemini-1.5-flash';
-  } else if (availableModels.some(m => m.name === 'models/gemini-1.5-pro' && supportsGenerate(m))) {
-    targetModel = 'models/gemini-1.5-pro';
-  } else if (availableModels.some(m => m.name === 'models/gemini-pro' && supportsGenerate(m))) {
-    targetModel = 'models/gemini-pro';
+  const getVersion = (name) => {
+    const match = name.match(/gemini-(\d+\.\d+)/);
+    return match ? parseFloat(match[1]) : 0;
+  };
+
+  const flashModels = availableModels
+    .filter(m => m.name.includes('gemini-') && m.name.includes('flash') && supportsGenerate(m))
+    .sort((a, b) => getVersion(b.name) - getVersion(a.name));
+    
+  const proModels = availableModels
+    .filter(m => m.name.includes('gemini-') && m.name.includes('pro') && supportsGenerate(m))
+    .sort((a, b) => getVersion(b.name) - getVersion(a.name));
+
+  if (flashModels.length > 0) {
+    targetModel = flashModels[0].name;
+  } else if (proModels.length > 0) {
+    targetModel = proModels[0].name;
   } else {
     // Fallback: pick the first model that supports generateContent
     const fallback = availableModels.find(supportsGenerate);

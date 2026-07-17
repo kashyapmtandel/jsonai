@@ -13,8 +13,17 @@ const app = (
   </React.StrictMode>
 );
 
-if (rootElement.hasChildNodes()) {
+// Distinguish between the raw index.html SEO fallback and actual React-prerendered HTML
+const hasSeoFallback = rootElement.querySelector('.app-shell-fallback');
+const isReactSnap = navigator.userAgent.includes('ReactSnap');
+const isPrerenderedByReact = rootElement.hasChildNodes() && !hasSeoFallback && !isReactSnap;
+
+if (isPrerenderedByReact) {
   hydrateRoot(rootElement, app);
 } else {
+  // Wipe the fallback SEO content (or previous route HTML during crawling) before mounting
+  if (rootElement.hasChildNodes()) {
+    rootElement.innerHTML = '';
+  }
   createRoot(rootElement).render(app);
 }
