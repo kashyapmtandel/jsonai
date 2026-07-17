@@ -12,6 +12,7 @@ const formatLabel = (title) => title.replace(/^JSON\s+/, '');
 
 const useTheme = () => {
   const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'dark';
     const stored = localStorage.getItem('json-tools-theme');
     return stored || 'dark';
   });

@@ -17,5 +17,8 @@ export default defineConfig({
   },
   build: {
     target: 'chrome78'
+  },
+  ssgOptions: {
+    dirStyle: 'nested'
   }
 })

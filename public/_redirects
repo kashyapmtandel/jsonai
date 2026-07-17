@@ -1,5 +1,13 @@
-# Redirect issue
-/*    /index.html   200
-
-# Serve the generated 404 page for unknown URLs
-/* 	 /404.html      404
+/formatter/         /json-formatter/         301
+/validator/          /json-validator/         301
+/converter/          /json-converter/         301
+/diff/                /json-diff/              301
+/path-finder/        /json-path-finder/       301
+/schema/              /json-schema/            301
+/schema-generator    /json-schema/            301
+/editor/              /json-editor/            301
+/ai-assistant/        /json-ai-assistant/      301
+/type-generator/      /json-type-generator/    301
+/minifier/            /json-minifier/          301
+/prompt-builder/      /json-prompt-builder/    301
+/escape/              /json-escape/            301

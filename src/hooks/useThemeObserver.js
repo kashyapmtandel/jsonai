@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 
 export const useThemeObserver = () => {
   const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'dark';
+    
     // Read from localStorage first — this is set by Navbar's useTheme hook and is
     // always correct. Falling back to the DOM attribute can cause a race condition
     // on page load where data-theme hasn't been applied yet.
