@@ -59,7 +59,7 @@ const AdBanner = ({
     >
       <ins
         className="adsbygoogle"
-        style={{ display: 'block' }}
+        style={{ display: 'none' }}
         data-ad-client={client}
         data-ad-slot={slot}
         data-ad-format="auto"
